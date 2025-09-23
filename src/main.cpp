@@ -12,7 +12,7 @@ static void glfw_error_callback(int error, const char* description) {
     fprintf(stderr, "GLFW Error %d: %s\n", error, description);
 }
 
-int main() {
+int main(int, char**) {
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
         return 1;
@@ -25,18 +25,18 @@ int main() {
     // Create window
     GLFWwindow* window = glfwCreateWindow(1280, 720, "Monopoly", nullptr, nullptr);
     if (window == nullptr)
+        return 1;
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // vsync
 
-    // Setup Dear ImGui context
+    // Setup ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
     (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;  // Enable Gamepad Controls
 
-    // Setup Dear ImGui style
+    // style
     ImGui::StyleColorsDark();
     // ImGui::StyleColorsLight();
 
@@ -70,7 +70,6 @@ int main() {
 
         glfwSwapBuffers(window);
     }
-    // Cleanup
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
