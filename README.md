@@ -1,1 +1,1 @@
-test
+Make sure to clone with --recursive flag, or "git submodule update --init" after cloning to ensure imgui is included.
