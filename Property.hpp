@@ -51,6 +51,8 @@ private:
             /*LOGIC*/
                 // ask if player would like to buy house/hotel
                 /*LOGIC*/
+                    // if player buys house/hotel
+                    /*LOGIC*/
                 return true;
         }
         
