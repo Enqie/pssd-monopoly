@@ -16,8 +16,10 @@ private:
     bool isInJail = false;
     bool isBankrupt = false;
 
-    // container to store Properties owned by player
+    // container to store Properties/Utilities/Railroads owned by player
     std::unordered_set<Property*> ownedProperties;
+    // std::unordered_set<Utility*> ownedUtilities;
+    // std::unordered_set<Railroad*> ownedRailroads;
 
     // unordered map to store number of each property colours a player owns
     std::unordered_map<std::string, int> propertyColours;
@@ -28,9 +30,29 @@ public:
     std::string getName(){ return name; }
     int getMoney(){ return money; }
     std::unordered_set<Property*> getProperties(){ return ownedProperties; }
-    void setMoney(int newAmount){ money = newAmount; }
+    bool getJailStatus(){ return isInJail; }
+    // bool getBankruptStatus(){ return isBankrupt; }
+    void setJailStatus(bool status){ isInJail = status; }
+    void setBankruptStatus(bool status){ isBankrupt = status; }
 
-    // money functions
+    // NEED TO UPDATE function to calculate bankruptcy status of player based on money and property value
+    bool checkBankruptcy(){
+        /* LOGIC */
+        return isBankrupt;
+    }
+
+    // buy functions
+    void buyProperty(Property* property){
+        // add property to list of owned properties
+        ownedProperties.insert(property);
+
+        // update list of owned property colours
+        auto found = propertyColours.find(property->getColour());
+        if(found != propertyColours.end()) found->second++;
+        else propertyColours.insert({property->getColour(), 1});
+    }
+
+    // methods to add or subtract amounts of money from player
     void addMoney(int amount){ money+=amount; }
     void subMoney(int amount){ money-=amount; }
 };
