@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "Player.hpp"
+
 class Space
 {
 protected:
@@ -11,5 +13,5 @@ public:
     Space(/* args */){}
     Space(std::string name) {}
 
-    virtual void land() = 0;    // pure virtual function for what happens if you land on a space
+    virtual void land(Player* player) = 0;    // pure virtual function for what happens if you land on a space
 };
