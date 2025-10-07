@@ -5,18 +5,12 @@
 #include "Player.hpp"
 #include "Space.hpp"
 
-class Property: public Space
+class Railroad: public Space
 {
 private:
-    // Property states
+    // Railroad states
     bool isOwned = false;
     bool isMortgaged = false;
-
-    // Property information
-    std::string colour;                 // colour group of property
-    std::vector<int> propertyCost;      // cost to buy property/houses/hotels 
-    std::vector<int> rentPrice;         // cost of rent with respective amount of houses/hotels
-    int rent;                           // current rent
 
     // private methods
     // method makes player pay rent if they do not own this property; returns true if player pays rent
@@ -27,7 +21,12 @@ private:
         // check if current property is owned -> check if current player must pay rent
         if(isOwned){
             // check if current player does not own this property -> current player must pay rent
-            if(player->getProperties().find(this) == player->getProperties().end()){
+            if(player->getRailroads().find(this) == player->getRailroads().end()){
+                // calculate rent
+                int rent = 25;              // initial rent for railroad is 25
+                for(int i = 0; i < player->getRailroads().size(); i++)
+                    rent*=2;                // rent doubles for each owned railroad
+                
                 player->subMoney(rent);     // subtract rent amount
 
                 /* INCREASE RENT AMOUNT FOR OWNER OF RAILROAD */
@@ -37,29 +36,6 @@ private:
         }
 
         // otherwise player does not need to pay rent, return false
-        return false;
-    }
-
-    // method checks if player would like to buy house/hotel on property; returns true if player CAN buy house
-    bool buyHouse(Player* player){
-        // if property is not owned, cannot buy house/hotel
-        if(!isOwned) return false;
-
-        // if property is mortgaged, cannot buy house/hotel
-        if(isMortgaged) return false;
-
-        // check if current player owns this property
-        if(player->getProperties().find(this) != player->getProperties().end()){
-            // check if player owns all properties of this colour -> can buy house/hotel
-            /*LOGIC*/
-                // ask if player would like to buy house/hotel
-                /*LOGIC*/
-                    // if player buys house/hotel
-                    /*LOGIC*/
-                return true;
-        }
-        
-        // otherwise return false
         return false;
     }
 
@@ -77,12 +53,7 @@ private:
 
 public:
     // constructor sets name and colour of property
-    Property(std::string name, std::string colour): Space(name), colour(colour){}
-
-    // getters/setters
-    std::string getColour(){ return colour; }
-    void setHousePrice(std::vector<int> newCost){propertyCost = newCost;}
-    void setRentPrice(std::vector<int> newRentPrice){rentPrice = newRentPrice;}
+    Railroad(std::string name): Space(name){}
 
     // override pure virtual land function
     void land(Player* player){
@@ -94,7 +65,5 @@ public:
 
         // otherwise property is not owned, check if player would like to buy property
         if(buyProperty) return;
-
-        if(buyHouse) return;
     }
 };

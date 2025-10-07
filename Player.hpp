@@ -4,6 +4,8 @@
 #include <unordered_set>
 
 #include "Property.hpp"
+#include "Utility.hpp"
+#include "Railroad.hpp"
 
 class Player
 {
@@ -18,8 +20,8 @@ private:
 
     // container to store Properties/Utilities/Railroads owned by player
     std::unordered_set<Property*> ownedProperties;
-    // std::unordered_set<Utility*> ownedUtilities;
-    // std::unordered_set<Railroad*> ownedRailroads;
+    std::unordered_set<Utility*> ownedUtilities;
+    std::unordered_set<Railroad*> ownedRailroads;
 
     // unordered map to store number of each property colours a player owns
     std::unordered_map<std::string, int> propertyColours;
@@ -30,6 +32,8 @@ public:
     std::string getName(){ return name; }
     int getMoney(){ return money; }
     std::unordered_set<Property*> getProperties(){ return ownedProperties; }
+    std::unordered_set<Utility*> getUtilities(){ return ownedUtilities; }
+    std::unordered_set<Railroad*> getRailroads(){ return ownedRailroads; }
     bool getJailStatus(){ return isInJail; }
     // bool getBankruptStatus(){ return isBankrupt; }
     void setJailStatus(bool status){ isInJail = status; }
