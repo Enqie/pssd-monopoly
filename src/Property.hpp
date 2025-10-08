@@ -13,6 +13,7 @@ private:
     bool isMortgaged = false;
 
     // Property information
+    Player* owned;
     std::string colour;                 // colour group of property
     std::vector<int> propertyCost;      // cost to buy property/houses/hotels 
     std::vector<int> rentPrice;         // cost of rent with respective amount of houses/hotels
@@ -50,13 +51,11 @@ private:
 
         // check if current player owns this property
         if(player->getProperties().find(this) != player->getProperties().end()){
-            // check if player owns all properties of this colour -> can buy house/hotel
+            // ask if player would like to buy house/hotel
             /*LOGIC*/
-                // ask if player would like to buy house/hotel
+                // if player buys house/hotel
                 /*LOGIC*/
-                    // if player buys house/hotel
-                    /*LOGIC*/
-                return true;
+            return true;
         }
         
         // otherwise return false
@@ -77,7 +76,9 @@ private:
 
 public:
     // constructor sets name and colour of property
-    Property(std::string name, std::string colour): Space(name), colour(colour){}
+    Property(std::string name, std::string colour): Space(name), colour(colour){
+        owned = nullptr;
+    }
 
     // getters/setters
     std::string getColour(){ return colour; }

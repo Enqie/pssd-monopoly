@@ -12,6 +12,8 @@ private:
     bool isOwned = false;
     bool isMortgaged = false;
 
+    Player* owned;
+
     // private methods
     // method makes player pay rent if they do not own this property; returns true if player pays rent
     bool payRent(Player* player){
@@ -54,7 +56,9 @@ private:
 
 public:
     // constructor sets name and colour of property
-    Utility(std::string name): Space(name){}
+    Utility(std::string name): Space(name){
+        owned = nullptr;
+    }
 
     // override pure virtual land function
     void land(Player* player){

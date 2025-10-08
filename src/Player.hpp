@@ -39,9 +39,9 @@ public:
     void setJailStatus(bool status){ isInJail = status; }
     void setBankruptStatus(bool status){ isBankrupt = status; }
 
-    // NEED TO UPDATE function to calculate bankruptcy status of player based on money and property value
+    // calculate bankruptcy status of player based on money 
     bool checkBankruptcy(){
-        /* LOGIC */
+        if(money<=0) isBankrupt = true;
         return isBankrupt;
     }
 
@@ -54,6 +54,18 @@ public:
         auto found = propertyColours.find(property->getColour());
         if(found != propertyColours.end()) found->second++;
         else propertyColours.insert({property->getColour(), 1});
+    }
+
+    // does interface stuff checking if Player would like to buy property (return true if yes)
+    bool isBuyProperty(){
+        /* LOGIC FOR INTERFACE */
+        // check if Player has enough money
+
+
+        // ask if Player would like to buy property
+
+
+        // return true if Player buys property and false otherwise
     }
 
     // methods to add or subtract amounts of money from player
