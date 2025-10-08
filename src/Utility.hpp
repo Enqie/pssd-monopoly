@@ -12,7 +12,7 @@ private:
     bool isOwned = false;
     bool isMortgaged = false;
 
-    Player* owned;
+    Player* owner;
 
     // private methods
     // method makes player pay rent if they do not own this property; returns true if player pays rent
@@ -23,16 +23,17 @@ private:
         // check if current property is owned -> check if current player must pay rent
         if(isOwned){
             // check if current player does not own this property -> current player must pay rent
-            if(player->getUtilities().find(this) == player->getUtilities().end()){
+            if(owner != player){
                 /* LOGIC FOR RENT USING DICE ROLL 
                 if 1 utility owned: rent 4 times dice roll
                 if 2 utilities owned: rent 10 times dice roll
                 */
-                int rent;
+                int rent = player->getDiceRoll();
+                if(owner->getUtilities().size()==2) rent*=10;
+                else                                rent*=4;
 
-                player->subMoney(rent);     // subtract rent amount
-
-                /* INCREASE RENT AMOUNT FOR OWNER OF RAILROAD */
+                player->subMoney(rent);     // subtract rent amount from player
+                owner->addMoney(rent);      // increase rent amount for owner
 
                 return true;                // return true as player must pay rent
             }
@@ -57,7 +58,7 @@ private:
 public:
     // constructor sets name and colour of property
     Utility(std::string name): Space(name){
-        owned = nullptr;
+        owner = nullptr;
     }
 
     // override pure virtual land function
