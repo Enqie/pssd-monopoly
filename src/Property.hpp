@@ -13,7 +13,7 @@ private:
     bool isMortgaged = false;
 
     // Property information
-    Player* owned;
+    Player* owner;
     std::string colour;                 // colour group of property
     std::vector<int> propertyCost;      // cost to buy property/houses/hotels 
     std::vector<int> rentPrice;         // cost of rent with respective amount of houses/hotels
@@ -31,7 +31,7 @@ private:
             if(player->getProperties().find(this) == player->getProperties().end()){
                 player->subMoney(rent);     // subtract rent amount
 
-                /* INCREASE RENT AMOUNT FOR OWNER OF RAILROAD */
+                owner->addMoney(rent);      // rent is paid to owner of property
 
                 return true;                // return true as player must pay rent
             }
@@ -77,13 +77,14 @@ private:
 public:
     // constructor sets name and colour of property
     Property(std::string name, std::string colour): Space(name), colour(colour){
-        owned = nullptr;
+        owner = nullptr;
     }
 
     // getters/setters
     std::string getColour(){ return colour; }
     void setHousePrice(std::vector<int> newCost){propertyCost = newCost;}
     void setRentPrice(std::vector<int> newRentPrice){rentPrice = newRentPrice;}
+    void setOwner(Player* newOwner){ owner = newOwner; }
 
     // override pure virtual land function
     void land(Player* player){

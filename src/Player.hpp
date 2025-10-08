@@ -47,6 +47,8 @@ public:
 
     // buy functions
     void buyProperty(Property* property){
+        
+
         // add property to list of owned properties
         ownedProperties.insert(property);
 
@@ -54,18 +56,6 @@ public:
         auto found = propertyColours.find(property->getColour());
         if(found != propertyColours.end()) found->second++;
         else propertyColours.insert({property->getColour(), 1});
-    }
-
-    // does interface stuff checking if Player would like to buy property (return true if yes)
-    bool isBuyProperty(){
-        /* LOGIC FOR INTERFACE */
-        // check if Player has enough money
-
-
-        // ask if Player would like to buy property
-
-
-        // return true if Player buys property and false otherwise
     }
 
     // methods to add or subtract amounts of money from player
