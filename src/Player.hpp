@@ -12,7 +12,7 @@ class Player
 {
 private:
     std::string name;
-
+    int position = 0;           // player starts at pos 0 (GO)
     int money = 1500;           // player starts with 1500
 
     // Player has 2 dice
@@ -44,33 +44,13 @@ public:
     // bool getBankruptStatus(){ return isBankrupt; }
     void setJailStatus(bool status){ isInJail = status; }
     void setBankruptStatus(bool status){ isBankrupt = status; }
+    int getPos(){ return position; }
+    void setPos(int pos){ position = pos; }
 
-    // roll dice function
-    int rollDice(){
-        dice1 = rand() % 6 + 1;
-        dice2 = rand() % 6 + 1;
-        return dice1+dice2;
-    }
-
-    // calculate bankruptcy status of player based on money 
-    bool checkBankruptcy(){
-        if(money<=0) isBankrupt = true;
-        return isBankrupt;
-    }
-
-    // buy functions
-    void buyProperty(Property* property){
-        // update owner in property
-        property->setOwner(this);
-
-        // add property to list of owned properties
-        ownedProperties.insert(property);
-
-        // update list of owned property colours
-        auto found = propertyColours.find(property->getColour());
-        if(found != propertyColours.end()) found->second++;
-        else propertyColours.insert({property->getColour(), 1});
-    }
+    // function declarations
+    int rollDice();
+    bool checkBankruptcy();
+    void buyProperty(Property* property);
 
     // methods to add or subtract amounts of money from player
     void addMoney(int amount){ money+=amount; }
