@@ -11,7 +11,7 @@ protected:
 public:
     // constructors
     Space(/* args */){}
-    Space(std::string name) {}
+    Space(std::string name) : name(name) {}
 
     std::string getName(){ return name; }
 
