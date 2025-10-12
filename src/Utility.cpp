@@ -1,9 +1,10 @@
 #include "Space.hpp"
 #include "Player.hpp"
+#include "Game.hpp"
 
 // private methods
 // method makes player pay rent if they do not own this property; returns true if player pays rent
-bool Utility::payRent(Player* player){
+bool Utility::payRent(Player* player, int diceRoll){
     // rent cannot be collected on a mortgaged property so return false
     if(isMortgaged) return false;
 
@@ -15,7 +16,7 @@ bool Utility::payRent(Player* player){
             if 1 utility owned: rent 4 times dice roll
             if 2 utilities owned: rent 10 times dice roll
             */
-            int rent = player->getDiceRoll();
+            int rent = diceRoll;
             if(owner->getUtilities().size()==2) rent*=10;
             else                                rent*=4;
 
@@ -48,7 +49,7 @@ void Utility::land(Player* player){
     if(isMortgaged) return;
 
     // if rent is paid, nothing else must be done so return
-    if(payRent(player)) return;
+    //if(payRent(player)) return;
 
     // otherwise property is not owned, check if player would like to buy property
     //if(buyProperty) return;

@@ -2,13 +2,6 @@
 
 using namespace std;
 
-// roll dice function
-int Player::rollDice(){
-    dice1 = rand() % 6 + 1;
-    dice2 = rand() % 6 + 1;
-    return dice1+dice2;
-}
-
 // calculate bankruptcy status of player based on money 
 bool Player::checkBankruptcy(){
     if(money<=0) isBankrupt = true;

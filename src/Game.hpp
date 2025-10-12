@@ -15,15 +15,34 @@ class Game {
     vector<unique_ptr<Space>> board;
     vector<Player> players;
     int activePlayer;
+    int playerCount;
+    int roll;
 
     public:
-    Game() : activePlayer(0) {}; // constructor, sets activePlayer to 0
+    Game() : activePlayer(0), playerCount(0), roll(0) {} // constructor, initialises ints
     void start(int p);
+    void move(int spaces);
 
     // get and add space
-    Space* getSpace(int i) { return board[i].get(); };
-    void addSpace(Space* space) { board.emplace_back(space); };
+    Space* getSpace(int i) { return board[i].get(); }
+    void addSpace(Space* space) { board.emplace_back(space); }
 
     // get board size
-    int getBoardSize() const { return board.size(); }
+    int getBoardSize() { return board.size(); }
+
+    // player getters
+    int getPlayer() { return activePlayer; }
+    int getPlayerCount() { return playerCount; }
+
+    void nextTurn() { activePlayer = (activePlayer + 1) % playerCount; }
+
+    // dice functions
+    bool rollDice() {
+        int dice1 = rand() % 6 + 1;
+        int dice2 = rand() % 6 + 1;
+        roll = dice1 + dice2;
+        if (dice1 == dice2) return true;
+        return false;
+    }
+    int getDice() { return roll; }
 };

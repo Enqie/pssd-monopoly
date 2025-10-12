@@ -16,7 +16,7 @@ private:
 
     // private methods
     // method makes player pay rent if they do not own this property; returns true if player pays rent
-    bool payRent(Player* player);
+    bool payRent(Player* player, int diceRoll);
 
     // method checks if player would like to buy property; returns true if a player CAN buy property
     bool buyProperty(Player* player);
