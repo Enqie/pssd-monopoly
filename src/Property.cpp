@@ -1,3 +1,6 @@
+#include <iostream>
+#include <string>
+
 #include "Property.hpp"
 #include "Player.hpp"
 
@@ -32,10 +35,23 @@ bool Property::buyHouse(Player* player){
 
     // check if current player owns this property
     if(player->getProperties().find(this) != player->getProperties().end()){
+        // total number of houses/hotels
+        int totalHouses = rentPrice.size()-1;
+
+        // check if player owns all houses/hotels
+        if(numHouses==totalHouses){ return true; }
+
         // ask if player would like to buy house/hotel
-        /*LOGIC*/
-            // if player buys house/hotel
-            /*LOGIC*/
+        std::string houseOrHotel = (numHouses<rentPrice.size()-1) ? "house" : "hotel";
+        char choice;
+        std::cout << "Would you like to buy " << houseOrHotel << " for $" << propertyCost[numHouses+1] << "? (y/n):";
+        std::cin >> choice;
+        if(choice=='y'){
+            player->subMoney(propertyCost[numHouses+1]);    // decrease money by house/hotel cost
+            numHouses++;                                    // increase count of number of owned houses/hotels
+            rent = rentPrice[numHouses];                    // increase rent price
+        }
+
         return true;
     }
     
@@ -50,6 +66,12 @@ bool Property::buyProperty(Player* player){
 
     // ask if player would like to buy property
     /*LOGIC*/
+    char choice;
+    std::cout << "Would you like to buy " << Property::getName() << " for $" << rentPrice.front() << "? (y/n):";
+    std::cin >> choice;
+    if(choice=='y'){
+        player->buyProperty(this);
+    }
 
     // player is able to buy property so return true
     return true;

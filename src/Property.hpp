@@ -18,6 +18,7 @@ private:
     std::vector<int> propertyCost;      // cost to buy property/houses/hotels 
     std::vector<int> rentPrice;         // cost of rent with respective amount of houses/hotels
     int rent;                           // current rent
+    int numHouses = 0;                  // number of houses/hotels owned by player
 
     // private methods
     // method makes player pay rent if they do not own this property; returns true if player pays rent
@@ -37,6 +38,7 @@ public:
 
     // getters/setters
     std::string getColour(){ return colour; }
+    int getCost(){ return propertyCost[numHouses]; }
     void setHousePrice(std::vector<int> newCost){propertyCost = newCost;}
     void setRentPrice(std::vector<int> newRentPrice){rentPrice = newRentPrice;}
     void setOwner(Player* newOwner){ owner = newOwner; }

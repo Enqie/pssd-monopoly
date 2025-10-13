@@ -20,6 +20,9 @@ void Player::buyProperty(Property* property){
     auto found = propertyColours.find(property->getColour());
     if(found != propertyColours.end()) found->second++;
     else propertyColours.insert({property->getColour(), 1});
+
+    // decrease money of player by cost of buying
+    subMoney(property->getCost());
 }
 
 void Player::buyRailroad(Railroad* railroad){
@@ -28,6 +31,9 @@ void Player::buyRailroad(Railroad* railroad){
 
     // add to list of owned railroads
     ownedRailroads.insert(railroad);
+
+    // decrease money of player by cost of buying
+    subMoney(railroad->getCost());
 }
 
 void Player::buyUtility(Utility* utility){
@@ -36,4 +42,7 @@ void Player::buyUtility(Utility* utility){
 
     // add to list of owned railroads
     ownedUtilities.insert(utility);
+
+    // decrease money of player by cost of buying
+    subMoney(utility->getCost());
 }
