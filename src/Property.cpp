@@ -86,7 +86,7 @@ void Property::land(Player* player){
     if(payRent(player)) return;
 
     // otherwise property is not owned, check if player would like to buy property
-    //if(buyProperty) return;
+    if(buyProperty) return;
 
-    //if(buyHouse) return;
+    if(buyHouse) return;
 }
