@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Space.hpp"
+#include "Player.hpp"
 
 class Tax : public Space
 {

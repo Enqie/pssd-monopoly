@@ -21,3 +21,19 @@ void Player::buyProperty(Property* property){
     if(found != propertyColours.end()) found->second++;
     else propertyColours.insert({property->getColour(), 1});
 }
+
+void Player::buyRailroad(Railroad* railroad){
+    // update owner in railroad
+    railroad->setOwner(this);
+
+    // add to list of owned railroads
+    ownedRailroads.insert(railroad);
+}
+
+void Player::buyUtility(Utility* utility){
+    // update owner in railroad
+    utility->setOwner(this);
+
+    // add to list of owned railroads
+    ownedUtilities.insert(utility);
+}

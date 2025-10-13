@@ -10,7 +10,7 @@ class Utility: public Space
 private:
     // Property states
     bool isOwned = false;
-    bool isMortgaged = false;
+    // bool isMortgaged = false;
 
     Player* owner;
 
@@ -26,6 +26,9 @@ public:
     Utility(std::string name): Space(name){
         owner = nullptr;
     }
+
+    // getters/setters
+    void setOwner(Player* newOwner){ owner = newOwner; }
 
     // override pure virtual land function
     void land(Player* player) override;

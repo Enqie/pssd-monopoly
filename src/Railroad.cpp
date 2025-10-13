@@ -1,11 +1,14 @@
+#include <iostream>
+
+#include "Railroad.hpp"
 #include "Space.hpp"
 #include "Player.hpp"
 
 // private methods
 // method makes player pay rent if they do not own this property; returns true if player pays rent
 bool Railroad::payRent(Player* player){
-    // rent cannot be collected on a mortgaged property so return false
-    if(isMortgaged) return false;
+    // // rent cannot be collected on a mortgaged property so return false
+    // if(isMortgaged) return false;
 
     // check if current property is owned -> check if current player must pay rent
     if(isOwned){
@@ -35,6 +38,12 @@ bool Railroad::buyProperty(Player* player){
 
     // ask if player would like to buy property
     /*LOGIC*/
+    char choice;
+    std::cout << "Would you like to buy " << Railroad::getName() << "? (y/n):";
+    std::cin >> choice;
+    if(choice=='y'){
+        player->buyRailroad(this);
+    }
 
     // player is able to buy property so return true
     return true;
@@ -42,8 +51,8 @@ bool Railroad::buyProperty(Player* player){
 
 // override pure virtual land function
 void Railroad::land(Player* player){
-    // rent cannot be collected on a mortgaged property; mortgaged properties are still owned so return
-    if(isMortgaged) return;
+    // // rent cannot be collected on a mortgaged property; mortgaged properties are still owned so return
+    // if(isMortgaged) return;
 
     // if rent is paid, nothing else must be done so return
     if(Railroad::payRent(player)) return;

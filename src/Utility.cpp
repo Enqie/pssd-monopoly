@@ -5,8 +5,8 @@
 // private methods
 // method makes player pay rent if they do not own this property; returns true if player pays rent
 bool Utility::payRent(Player* player, int diceRoll){
-    // rent cannot be collected on a mortgaged property so return false
-    if(isMortgaged) return false;
+    // // rent cannot be collected on a mortgaged property so return false
+    // if(isMortgaged) return false;
 
     // check if current property is owned -> check if current player must pay rent
     if(isOwned){
@@ -38,6 +38,13 @@ bool Utility::buyProperty(Player* player){
 
     // ask if player would like to buy property
     /*LOGIC*/
+    char choice;
+    std::cout << "Would you like to buy " << Utility::getName() << "? (y/n):";
+    std::cin >> choice;
+    if(choice=='y'){
+        player->buyUtility(this);
+    }
+
 
     // player is able to buy property so return true
     return true;
@@ -45,8 +52,8 @@ bool Utility::buyProperty(Player* player){
 
 // override pure virtual land function
 void Utility::land(Player* player){
-    // rent cannot be collected on a mortgaged property; mortgaged properties are still owned so return
-    if(isMortgaged) return;
+    // // rent cannot be collected on a mortgaged property; mortgaged properties are still owned so return
+    // if(isMortgaged) return;
 
     // if rent is paid, nothing else must be done so return
     //if(payRent(player)) return;

@@ -44,6 +44,8 @@ public:
     // function declarations
     bool checkBankruptcy();
     void buyProperty(Property* property);
+    void buyRailroad(Railroad* railroad);
+    void buyUtility(Utility* utility);
 
     // methods to add or subtract amounts of money from player
     void addMoney(int amount){ money+=amount; }

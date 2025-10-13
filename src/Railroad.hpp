@@ -10,9 +10,9 @@ class Railroad: public Space
 private:
     // Railroad states
     bool isOwned = false;
-    bool isMortgaged = false;
+    // bool isMortgaged = false;
 
-    Player* owned;
+    Player* owner;
 
     // private methods
     // method makes player pay rent if they do not own this property; returns true if player pays rent
@@ -24,8 +24,11 @@ private:
 public:
     // constructor sets name and colour of property
     Railroad(std::string name): Space(name){
-        owned = nullptr;
+        owner = nullptr;
     }
+
+    // getters/setters
+    void setOwner(Player* newOwner){ owner = newOwner; }
 
     // override pure virtual land function
     void land(Player* player) override;
