@@ -5,7 +5,12 @@ void Display::displayBoard(Game& game) {
     static int playerCount = 2;
     static bool newGame = true;
 
-    ImGui::Begin("Board"); // create board window 
+    // define window flags
+    ImGuiWindowFlags window_flags = 0;
+    window_flags |= ImGuiWindowFlags_NoTitleBar;
+    window_flags |= ImGuiWindowFlags_NoResize;
+    window_flags |= ImGuiWindowFlags_NoMove;
+    window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
 
     if (newGame) ImGui::OpenPopup("New Game"); // create popup if new game.
     
@@ -23,36 +28,55 @@ void Display::displayBoard(Game& game) {
         ImGui::EndPopup();
     }
 
-    // board window code
-    ImGui::Text("Board here");
-    ImGui::Text("Players: %i, Current player: %i", game.getPlayerCount(), game.getPlayer());
+    if (!newGame) {
+        ImGui::Begin("Board", NULL, window_flags); // create board window 
 
-    // check if board has spaces before rendering them
-    if (!game.getBoardSize()) { 
-        ImGui::Text("Board is empty!");
-    } else {
-        for (int i = 0; i < game.getBoardSize(); i++) { // TODO: actually render the board
-            Space* space = game.getSpace(i);
-            if (space) {
-                ImGui::Text("Space %d: %s", i, space->getName().c_str());
+        // board window code
+        ImGui::Text("Board here");
+
+        // check if board has spaces before rendering them
+        if (!game.getBoardSize()) { 
+            ImGui::Text("Board is empty!");
+        } else {
+            for (int i = 0; i < game.getBoardSize(); i++) { // TODO: actually render the board
+                Space* space = game.getSpace(i);
+                if (space) {
+                    ImGui::Text("Space %d: %s", i, space->getName().c_str());
+                }
             }
         }
+        ImGui::End(); // end board window
+
+
+        // controls window code
+        ImGui::Begin("Controls", NULL, window_flags);
+        if (ImGui::Button("Next player")) { // next player
+            game.nextTurn();
+        }
+
+        static bool rollDouble = false; // dice controls
+        if (ImGui::Button("Roll Test")) rollDouble = game.rollDice();
+        ImGui::Text("Roll: %i", game.getDice());
+        if (rollDouble) {
+            ImGui::Text("Doubles!");
+        }
+
+        if (ImGui::Button("Move")) game.move(game.getDice());
+        ImGui::End(); // end controls window
+
+        displayTest(game); // test window
     }
-    ImGui::End(); // end board window
-
-
-    // controls window code
-    ImGui::Begin("Controls");
-    if (ImGui::Button("Next player")) { // next player
-        game.nextTurn();
-    }
-
-    static bool rollDouble = false; // dice controls
-    if (ImGui::Button("Roll Test")) rollDouble = game.rollDice();
-    ImGui::Text("Roll: %i", game.getDice());
-    if (rollDouble) {
-        ImGui::Text("Doubles!");
-    }
-
-    ImGui::End(); // end controls window
 };
+
+void Display::displayTest(Game& game) {
+    Player& player = game.getPlayer(); // get current player object
+    int pos = player.getPos();
+    Space* space = game.getSpace(pos);
+
+    ImGui::Begin("Debug window");
+    ImGui::Text("Players: %i, Current player: %s", game.getPlayerCount(), player.getName().c_str());
+    ImGui::Text("Player Balance: %i", player.getMoney());
+    ImGui::Text("Player position: %i/%i", pos, game.getBoardSize());
+    ImGui::Text("Current Space: %s, Type: %s, Cost: $%i", space->getName().c_str(), space->getType().c_str(), space->getCost());
+    ImGui::End();
+}

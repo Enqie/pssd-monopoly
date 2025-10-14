@@ -6,6 +6,7 @@
 class Tax : public Space
 {
 private:
+    std::string name;
     int taxAmount;
 public:
     Tax(std::string name, int taxAmount): Space(name), taxAmount(taxAmount){}
@@ -13,4 +14,6 @@ public:
     void land(Player* player){
         player->subMoney(taxAmount);
     }
+
+    std::string getType() override { return "Tax"; }
 };

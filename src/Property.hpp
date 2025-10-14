@@ -15,6 +15,7 @@ private:
     // Property information
     Player* owner;
     std::string colour;                 // colour group of property
+    int cost;                           // cost of the land title
     std::vector<int> propertyCost;      // cost to buy property/houses/hotels 
     std::vector<int> rentPrice;         // cost of rent with respective amount of houses/hotels
     int rent;                           // current rent
@@ -32,17 +33,21 @@ private:
 
 public:
     // constructor sets name and colour of property
-    Property(std::string name, std::string colour): Space(name), colour(colour){
+    Property(std::string name, std::string colour, int cost): Space(name), colour(colour), cost(cost) {
         owner = nullptr;
     }
 
     // getters/setters
     std::string getColour(){ return colour; }
-    int getCost(){ return propertyCost[numHouses]; }
+    int getPropertyCost(){ return propertyCost[numHouses]; }
     void setHousePrice(std::vector<int> newCost){propertyCost = newCost;}
     void setRentPrice(std::vector<int> newRentPrice){rentPrice = newRentPrice;}
     void setOwner(Player* newOwner){ owner = newOwner; }
+    bool getOwned() { return isOwned; }
 
-    // override pure virtual land function
+    // override pure virtual functions
     void land(Player* player) override;
+    std::string getType() override { return "Property"; };
+
+    int getCost() override { return cost; }
 };

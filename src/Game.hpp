@@ -7,6 +7,8 @@
 #include "Property.hpp"
 #include "Jail.hpp"
 #include "Go.hpp"
+#include "GoToJail.hpp"
+#include "Tax.hpp"
 
 using namespace std;
 
@@ -31,7 +33,7 @@ class Game {
     int getBoardSize() { return board.size(); }
 
     // player getters
-    int getPlayer() { return activePlayer; }
+    Player& getPlayer() { return players[activePlayer]; }
     int getPlayerCount() { return playerCount; }
 
     void nextTurn() { activePlayer = (activePlayer + 1) % playerCount; }

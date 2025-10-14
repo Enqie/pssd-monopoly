@@ -80,13 +80,13 @@ bool Property::buyProperty(Player* player){
 // override pure virtual land function
 void Property::land(Player* player){
     // rent cannot be collected on a mortgaged property; mortgaged properties are still owned so return
-    if(isMortgaged) return;
+    //if(isMortgaged) return;
 
     // if rent is paid, nothing else must be done so return
     if(payRent(player)) return;
 
     // otherwise property is not owned, check if player would like to buy property
-    if(buyProperty) return;
+    // if(buyProperty) return;
 
-    if(buyHouse) return;
+    // if(buyHouse) return;
 }

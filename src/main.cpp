@@ -43,6 +43,7 @@ int main(int, char**) {
     // style
     ImGui::StyleColorsDark();
     // ImGui::StyleColorsLight();
+    ImGui::LoadIniSettingsFromDisk("WindowDefaults.ini"); // Window default positions
 
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOpenGL(window, true);

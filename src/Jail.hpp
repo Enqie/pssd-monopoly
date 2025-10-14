@@ -83,4 +83,6 @@ class Jail : public Space {
       }
     }
   }
+
+  std::string getType() override { return "Jail"; }
 };
