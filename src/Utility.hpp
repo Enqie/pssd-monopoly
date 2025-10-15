@@ -35,4 +35,5 @@ public:
 
     // override pure virtual land function
     void land(Player* player) override;
+    std::string getType() override { return "Utility"; };
 };

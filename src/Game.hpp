@@ -4,6 +4,8 @@
 #include <memory>
 #include "Player.hpp"
 #include "Space.hpp"
+#include "Utility.hpp"
+#include "FreeParking.hpp"
 #include "Property.hpp"
 #include "Jail.hpp"
 #include "Go.hpp"
