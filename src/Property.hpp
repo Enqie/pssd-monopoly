@@ -10,7 +10,6 @@ class Property: public Space
 private:
     // Property states
     bool isOwned = false;
-    bool isMortgaged = false;
 
     // Property information
     Player* owner;
@@ -50,4 +49,6 @@ public:
     std::string getType() override { return "Property"; };
 
     int getCost() override { return cost; }
+
+    ImVec4 getColourVec() override;
 };

@@ -66,3 +66,11 @@ void Player::setPos(int space) {
     Space* newSpace = game->getSpace(space);
     newSpace->land(this);
 }
+
+bool Player::payBail() {
+    if (isInJail) {
+        this->subMoney(50);
+        this->setJailStatus(false);
+        return true;
+    } else return false;
+}

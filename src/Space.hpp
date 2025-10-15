@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "imgui.h"
 
 class Player;
 
@@ -20,4 +21,6 @@ public:
     virtual std::string getType() = 0;      // pure virtual function to get space type
 
     virtual int getCost() { return 0; }     // function to get property cost, returns 0 if not overridden by a child class
+
+    virtual ImVec4 getColourVec() { return ImVec4(0.5f, 0.5f, 0.5f, 0.5f); }
 };

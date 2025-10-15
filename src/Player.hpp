@@ -51,6 +51,7 @@ public:
 
     void move(int spaces);  // move spaces
     void setPos(int pos);   // set player
+    bool payBail();
 
     // methods to add or subtract amounts of money from player
     void addMoney(int amount){ money+=amount; }

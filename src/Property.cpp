@@ -6,9 +6,6 @@
 
 // method makes player pay rent if they do not own this property; returns true if player pays rent
 bool Property::payRent(Player* player){
-    // rent cannot be collected on a mortgaged property so return false
-    if(isMortgaged) return false;
-
     // check if current property is owned -> check if current player must pay rent
     if(isOwned){
         // check if current player does not own this property -> current player must pay rent
@@ -29,9 +26,6 @@ bool Property::payRent(Player* player){
 bool Property::buyHouse(Player* player){
     // if property is not owned, cannot buy house/hotel
     if(!isOwned) return false;
-
-    // if property is mortgaged, cannot buy house/hotel
-    if(isMortgaged) return false;
 
     // check if current player owns this property
     if(player->getProperties().find(this) != player->getProperties().end()){
@@ -79,8 +73,6 @@ bool Property::buyProperty(Player* player){
 
 // override pure virtual land function
 void Property::land(Player* player){
-    // rent cannot be collected on a mortgaged property; mortgaged properties are still owned so return
-    //if(isMortgaged) return;
 
     // if rent is paid, nothing else must be done so return
     if(payRent(player)) return;
@@ -89,4 +81,20 @@ void Property::land(Player* player){
     // if(buyProperty) return;
 
     // if(buyHouse) return;
+}
+
+ImVec4 Property::getColourVec() {
+    static const std::unordered_map<std::string, ImVec4> colorMap = {
+        {"purple", ImVec4(0.4f, 0.0f, 0.7f, 1.0f)},
+        {"white", ImVec4(0.6f, 0.8f, 1.0f, 1.0f)},
+        {"pink", ImVec4(0.8f, 0.2f, 0.6f, 1.0f)},
+        {"orange", ImVec4(1.0f, 0.6f, 0.1f, 1.0f)},
+        {"red", ImVec4(0.9f, 0.1f, 0.1f, 1.0f)},
+        {"yellow", ImVec4(1.0f, 0.9f, 0.0f, 1.0f)},
+        {"green", ImVec4(0.1f, 0.7f, 0.4f, 1.0f)},
+        {"blue", ImVec4(0.0f, 0.5f, 0.7f, 1.0f)}
+    };
+
+
+    return colorMap.find(colour)->second;
 }
