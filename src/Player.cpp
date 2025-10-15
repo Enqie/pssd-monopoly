@@ -1,4 +1,5 @@
 #include "Player.hpp"
+#include "Game.hpp"
 
 using namespace std;
 
@@ -45,4 +46,23 @@ void Player::buyUtility(Utility* utility){
 
     // decrease money of player by cost of buying
     subMoney(utility->getCost());
+}
+
+// move spaces
+void Player::move(int spaces) {
+    int boardSize = game->getBoardSize();
+    int pos = position + spaces;        // position without wrapping
+    setPos(pos % boardSize);            // set position, modulus to wrap around the board
+
+    if (boardSize <= pos) {            // pass go check
+        this->addMoney(200);
+    }
+};
+
+void Player::setPos(int space) {
+    position = space;
+
+    // call land function for a space
+    Space* newSpace = game->getSpace(space);
+    newSpace->land(this);
 }

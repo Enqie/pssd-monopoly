@@ -25,7 +25,6 @@ class Game {
     public:
     Game() : activePlayer(0), playerCount(0), roll(0) {} // constructor, initialises ints
     void start(int p);
-    void move(int spaces);
 
     // get and add space
     Space* getSpace(int i) { return board[i].get(); }

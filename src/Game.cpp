@@ -6,7 +6,7 @@ void Game::start(int p) {
     // clear players and add new players for player number
     players.clear();
     for (int i = 0; i < p; i++) {
-        players.emplace_back("P" + std::to_string(i + 1));
+        players.emplace_back("P" + std::to_string(i + 1), this);
     }
     playerCount = p;
     
@@ -53,14 +53,3 @@ void Game::start(int p) {
     addSpace(new Tax("Income Tax", 200));
     addSpace(new Property("Boardwalk", "blue", 400));
 }
-
-// move spaces
-void Game::move(int spaces) {
-    int currentPos = players[activePlayer].getPos();        // get current position
-    int newPos = (currentPos + spaces) % getBoardSize();    // get new position, modulus to wrap around the board
-    players[activePlayer].setPos(newPos);                   // set position
-
-    // call land function for a space
-    Space* landedSpace = getSpace(newPos);
-    landedSpace->land(&getPlayer());
-};

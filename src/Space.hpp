@@ -15,7 +15,7 @@ public:
 
     std::string getName(){ return name; }
 
-    virtual void land(Player* player) = 0;  // pure virtual function for what happens if you land on a space
+    virtual void land(Player* player) {}    // virtual function for what happens if you land on a space
 
     virtual std::string getType() = 0;      // pure virtual function to get space type
 

@@ -47,6 +47,7 @@ void Display::displayBoard(Game& game) {
         }
         ImGui::End(); // end board window
 
+        Player& player = game.getPlayer(); // get current player object
 
         // controls window code
         ImGui::Begin("Controls", NULL, window_flags);
@@ -61,7 +62,7 @@ void Display::displayBoard(Game& game) {
             ImGui::Text("Doubles!");
         }
 
-        if (ImGui::Button("Move")) game.move(game.getDice());
+        if (ImGui::Button("Move")) player.move(game.getDice()); // move active player
         ImGui::End(); // end controls window
 
         displayTest(game); // test window

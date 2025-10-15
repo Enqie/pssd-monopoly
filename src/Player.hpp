@@ -7,9 +7,12 @@
 #include "Utility.hpp"
 #include "Railroad.hpp"
 
+class Game;
+
 class Player
 {
 private:
+    Game* game;
     std::string name;
     int position = 0;           // player starts at pos 0 (GO)
     int money = 1500;           // player starts with 1500
@@ -26,7 +29,7 @@ private:
     // unordered map to store number of each property colours a player owns
     std::unordered_map<std::string, int> propertyColours;
 public:
-    Player(std::string name): name(name){}
+    Player(std::string name, Game* game): game(game), name(name){}
 
     // getters/setters
     std::string getName(){ return name; }
@@ -39,13 +42,15 @@ public:
     void setJailStatus(bool status){ isInJail = status; }
     void setBankruptStatus(bool status){ isBankrupt = status; }
     int getPos(){ return position; }
-    void setPos(int pos){ position = pos; }
 
     // function declarations
     bool checkBankruptcy();
     void buyProperty(Property* property);
     void buyRailroad(Railroad* railroad);
     void buyUtility(Utility* utility);
+
+    void move(int spaces);  // move spaces
+    void setPos(int pos);   // set player
 
     // methods to add or subtract amounts of money from player
     void addMoney(int amount){ money+=amount; }
