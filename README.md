@@ -1,5 +1,5 @@
 # **Linux compatibility only. Developed and tested on Ubuntu WSL.**
-## Installing, compiling and running
+# Installing, compiling and running
 Clone repository with `--recursive` flag (or `git submodule update --init` after cloning) to ensure imgui is included.
 
 Requires libglfw3 which can be installed by running `sudo apt-get install libglfw3 libglfw3-dev`
