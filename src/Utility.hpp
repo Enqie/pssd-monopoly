@@ -33,6 +33,12 @@ public:
     int getCost(){ return cost; }
     void setOwner(Player* newOwner){ owner = newOwner; }
 
+    void setNotOwned();     // reset Property ownership 
+
+    // public buy functions
+    bool canBuyUtility();
+    void buyUtility(Player* player);
+
     // override pure virtual land function
     void land(Player* player) override;
     std::string getType() override { return "Utility"; };

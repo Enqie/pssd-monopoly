@@ -49,6 +49,24 @@ bool Railroad::buyProperty(Player* player){
     return true;
 }
 
+void Railroad::setNotOwned(){
+    if(!isOwned) return;
+    isOwned = false;
+    owner->removeRailroad(this);
+}
+
+// checks if player can buy Railroad
+bool Railroad::canBuyRailroad(){
+    if(isOwned) return false;
+    return true;
+}
+
+// runs buy function
+void Railroad::buyRailroad(Player* player){
+    if(canBuyRailroad) player->buyRailroad(this);
+}
+
+
 // override pure virtual land function
 void Railroad::land(Player* player){
     // // rent cannot be collected on a mortgaged property; mortgaged properties are still owned so return

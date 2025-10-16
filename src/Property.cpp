@@ -71,6 +71,15 @@ bool Property::buyPropertyOld(Player* player){
     return true;
 }
 
+// function to set owned status to false and reset Property variables
+void Property::setNotOwned(){
+    if(!isOwned) return;            // if isOwned is already false, do nothing
+    isOwned = false;                // set isOwned to false
+    rent = rentPrice[0];            // reset rent price to initial
+    numHouses = 0;                  // reset number of houses
+    owner->removeProperty(this);    // remove this property from player's list of owned property
+}
+
 // returns true if owner of property can buy another house/hotel
 bool Property::canBuyHouse(){
     // if property is not owned, cannot buy house/hotel
@@ -92,7 +101,7 @@ void Property::buyHouse(){
     } 
 }
 
-// returns true if owner of property can buy another house/hotel
+// returns true if owner of property can buy property
 bool Property::canBuyProperty(){
     // if property is owned, cannot buy property
     if(isOwned) return false;
@@ -100,6 +109,7 @@ bool Property::canBuyProperty(){
     return true;
 }
 
+// runs player buy function if player can buy property
 void Property::buyProperty(Player* player){
     // run check
     if(canBuyProperty()){

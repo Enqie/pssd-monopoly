@@ -50,6 +50,24 @@ bool Utility::buyProperty(Player* player){
     return true;
 }
 
+void Utility::setNotOwned(){
+    if(!isOwned) return;
+    isOwned = false;
+    owner->removeUtility(this);
+}
+
+// checks if player can buy Utility
+bool Utility::canBuyUtility(){
+    if(isOwned) return false;
+    return true;
+}
+
+// runs buy function
+void Utility::buyUtility(Player* player){
+    if(canBuyUtility) player->buyUtility(this);
+}
+
+
 // override pure virtual land function
 void Utility::land(Player* player){
     // // rent cannot be collected on a mortgaged property; mortgaged properties are still owned so return

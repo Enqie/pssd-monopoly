@@ -15,15 +15,12 @@ private:
     Player* owner;
     std::string colour;                 // colour group of property
     int cost;                           // cost of the land title
-    // std::vector<int> propertyCost;      // cost to buy property/houses/hotels 
     int houseCost;
     std::vector<int> rentPrice;         // cost of rent with respective amount of houses/hotels
     int rent;                           // current rent
     int numHouses = 0;                  // number of houses/hotels owned by player
 
     // private methods
-    // method makes player pay rent if they do not own this property; returns true if player pays rent
-    bool payRent(Player* player);
 
     // method checks if player would like to buy house/hotel on property; returns true if player CAN buy house
     // bool buyHouseOld(Player* player);
@@ -51,6 +48,11 @@ public:
     void setOwner(Player* newOwner){ owner = newOwner; }
     bool getOwned() { return isOwned; }
     int getHouseCost(){ return houseCost; }
+
+    void setNotOwned();     // reset Property ownership 
+    
+    // method makes player pay rent if they do not own this property; returns true if player pays rent
+    bool payRent(Player* player);
 
     // public buy functions
     bool canBuyHouse();
