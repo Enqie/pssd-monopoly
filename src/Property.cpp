@@ -38,12 +38,12 @@ bool Property::buyHouse(Player* player){
         // ask if player would like to buy house/hotel
         std::string houseOrHotel = (numHouses<rentPrice.size()-1) ? "house" : "hotel";
         char choice;
-        std::cout << "Would you like to buy " << houseOrHotel << " for $" << propertyCost[numHouses+1] << "? (y/n):";
+        std::cout << "Would you like to buy " << houseOrHotel << " for $" << houseCost << "? (y/n):";
         std::cin >> choice;
         if(choice=='y'){
-            player->subMoney(propertyCost[numHouses+1]);    // decrease money by house/hotel cost
-            numHouses++;                                    // increase count of number of owned houses/hotels
-            rent = rentPrice[numHouses];                    // increase rent price
+            player->subMoney(houseCost);    // decrease money by house/hotel cost
+            numHouses++;                    // increase count of number of owned houses/hotels
+            rent = rentPrice[numHouses];    // increase rent price
         }
 
         return true;
