@@ -20,14 +20,6 @@ private:
     int rent;                           // current rent
     int numHouses = 0;                  // number of houses/hotels owned by player
 
-    // private methods
-
-    // method checks if player would like to buy house/hotel on property; returns true if player CAN buy house
-    // bool buyHouseOld(Player* player);
-
-    // method checks if player would like to buy property; returns true if a player CAN buy property
-    bool buyPropertyOld(Player* player);
-
 public:
     // constructor sets name and colour of property
     // Property(std::string name, std::string colour, int cost): Space(name), colour(colour), cost(cost) {
@@ -42,7 +34,6 @@ public:
 
     // getters/setters
     void setOwner(Player* newOwner){ owner = newOwner; }
-    bool getOwned() { return isOwned; }
     void setNotOwned();     // reset Property ownership 
     
     // method makes player pay rent if they do not own this property; returns true if player pays rent
@@ -51,9 +42,9 @@ public:
     // public buy functions
     bool canBuyHouse(Player* player);
     void buyHouse(Player* player);
-    int getHouseCost(){ return houseCost; }
     int getHouseNum(){ return numHouses; }
 
+    // overrides for Space functions
     bool canBuy() override;
     void buy(Player* player) override;
     Player* getOwner() override { return owner; }

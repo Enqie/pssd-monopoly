@@ -190,10 +190,12 @@ void Display::displaySpaceInfo(Game& game) {
         ImGui::Text("Type: %s", currentSpace->getType().c_str());
         ImGui::NewLine();
 
+        ImGui::Text("Can be bought? %s", currentSpace->canBuy() ? "Yes" : "No");
+
         Player* owner = currentSpace->getOwner();
-        if (owner) {
-            ImGui::Text("Owned By: %s", owner->getName().c_str());
-        }
+        string ownerName = (owner != nullptr) ? owner->getName().c_str() : "None";
+        ImGui::Text("Owned By: %s", ownerName.c_str());
+
 
         if (currentSpace->getType() == "Property") {
             Property* currentProperty = dynamic_cast<Property*>(currentSpace);

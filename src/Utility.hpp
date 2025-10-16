@@ -17,7 +17,7 @@ private:
 
     // private methods
     // method makes player pay rent if they do not own this utility; returns true if player pays rent
-    bool payRent(Player* player, int diceRoll);
+    bool payRent(Player* player);
 
     // method checks if player would like to buy utility; returns true if a player CAN buy 
     bool buyProperty(Player* player);
@@ -35,8 +35,8 @@ public:
     void setNotOwned();     // reset Property ownership 
 
     // public buy functions
-    bool canBuyUtility();
-    void buyUtility(Player* player);
+    bool canBuy() override;
+    void buy(Player* player) override;
 
     // override pure virtual land function
     void land(Player* player) override;

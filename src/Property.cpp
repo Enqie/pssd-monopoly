@@ -49,7 +49,7 @@ bool Property::canBuy() {
 }
 
 void Property::buy(Player* player) {
-    if (!getOwned()) {
+    if (!isOwned) {
         player->buyProperty(this);
         setOwner(player);
         isOwned = true;
@@ -62,8 +62,6 @@ void Property::land(Player* player){
     if (isOwned && getOwner() != player) {
         payRent(player);
     }
-
-    // if(buyHouse) return;
 }
 
 ImVec4 Property::getColourVec() {

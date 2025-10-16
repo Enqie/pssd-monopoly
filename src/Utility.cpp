@@ -4,7 +4,7 @@
 
 // private methods
 // method makes player pay rent if they do not own this property; returns true if player pays rent
-bool Utility::payRent(Player* player, int diceRoll){
+bool Utility::payRent(Player* player){
     // // rent cannot be collected on a mortgaged property so return false
     // if(isMortgaged) return false;
 
@@ -16,9 +16,9 @@ bool Utility::payRent(Player* player, int diceRoll){
             if 1 utility owned: rent 4 times dice roll
             if 2 utilities owned: rent 10 times dice roll
             */
-            int rent = diceRoll;
+            int rent = 20;
             if(owner->getUtilities().size()==2) rent*=10;
-            else                                rent*=4;
+            else rent*=4;
 
             player->subMoney(rent);     // subtract rent amount from player
             owner->addMoney(rent);      // increase rent amount for owner
@@ -57,25 +57,24 @@ void Utility::setNotOwned(){
 }
 
 // checks if player can buy Utility
-bool Utility::canBuyUtility(){
+bool Utility::canBuy(){
     if(isOwned) return false;
     return true;
 }
 
 // runs buy function
-void Utility::buyUtility(Player* player){
-    if(canBuyUtility()) player->buyUtility(this);
+void Utility::buy(Player* player) {
+    if (!isOwned) {
+        player->buyUtility(this);
+        setOwner(player);
+        isOwned = true;
+    }
 }
 
 
 // override pure virtual land function
 void Utility::land(Player* player){
-    // // rent cannot be collected on a mortgaged property; mortgaged properties are still owned so return
-    // if(isMortgaged) return;
-
-    // if rent is paid, nothing else must be done so return
-    //if(payRent(player)) return;
-
-    // otherwise property is not owned, check if player would like to buy property
-    //if(buyProperty) return;
+    if (isOwned && getOwner() != player) {
+        payRent(player);
+    }
 }

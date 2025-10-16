@@ -7,8 +7,6 @@
 // private methods
 // method makes player pay rent if they do not own this property; returns true if player pays rent
 bool Railroad::payRent(Player* player){
-    // // rent cannot be collected on a mortgaged property so return false
-    // if(isMortgaged) return false;
 
     // check if current property is owned -> check if current player must pay rent
     if(isOwned){
@@ -56,19 +54,24 @@ void Railroad::setNotOwned(){
 }
 
 // checks if player can buy Railroad
-bool Railroad::canBuyRailroad(){
+bool Railroad::canBuy(){
     if(isOwned) return false;
     return true;
 }
 
 // runs buy function
-void Railroad::buyRailroad(Player* player){
-    if(canBuyRailroad()) player->buyRailroad(this);
+void Railroad::buy(Player* player) {
+    if (!isOwned) {
+        player->buyRailroad(this);
+        setOwner(player);
+        isOwned = true;
+    }
 }
-
 
 // override pure virtual land function
 void Railroad::land(Player* player){
     // if rent is paid, nothing else must be done so return
-    if(Railroad::payRent(player)) return;
+    if (isOwned && getOwner() != player) {
+        payRent(player);
+    }
 }

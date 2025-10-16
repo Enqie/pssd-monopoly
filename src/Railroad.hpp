@@ -35,9 +35,11 @@ public:
 
     void setNotOwned();     // reset Property ownership 
 
-    // public buy functions
-    bool canBuyRailroad();
-    void buyRailroad(Player* player);
+    // override virtual buy functions
+    bool canBuy() override;
+    void buy(Player* player) override;
+
+    Player* getOwner() override { return owner; }
 
     // override pure virtual functions
     void land(Player* player) override;
