@@ -46,14 +46,17 @@ public:
     void setNotOwned();     // reset Property ownership 
     
     // method makes player pay rent if they do not own this property; returns true if player pays rent
-    bool payRent(Player* player);
+    void payRent(Player* player);
 
     // public buy functions
-    bool canBuyHouse();
-    void buyHouse();
-    bool canBuyProperty();
-    void buyProperty(Player* player);
+    bool canBuyHouse(Player* player);
+    void buyHouse(Player* player);
     int getHouseCost(){ return houseCost; }
+    int getHouseNum(){ return numHouses; }
+
+    bool canBuy() override;
+    void buy(Player* player) override;
+    Player* getOwner() override { return owner; }
 
     // override pure virtual functions
     void land(Player* player) override;

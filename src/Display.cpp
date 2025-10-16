@@ -18,8 +18,9 @@ void Display::displayBoard(Game& game) {
     window_flags |= ImGuiWindowFlags_NoMove;
     window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
 
+
     if (newGame) ImGui::OpenPopup("New Game"); // create popup if new game.
-    
+
     // popup modal code
     if (ImGui::BeginPopupModal("New Game", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
         ImGui::SliderInt("players.", &playerCount, 2, 4); // input field sets player count
@@ -97,11 +98,10 @@ void Display::displayBoard(Game& game) {
         displayTest(game);           // call test window
 
         // ImGui Demo window
-        bool show_demo_window = true;
-        if (show_demo_window)
-            ImGui::ShowDemoWindow(&show_demo_window);
+        // ImGui::ShowDemoWindow();
     }
 };
+
 
 // controls window function
 void Display::displayControls(Game& game) {
@@ -112,7 +112,7 @@ void Display::displayControls(Game& game) {
 
     //ImGui::SetWindowFontScale(1.36f);    // set font scale
 
-    ImGui::Text("%s's Turn!", player.getName().c_str());
+    ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "%s's Turn!", player.getName().c_str());
     ImGui::SameLine();
     ImGui::Text("Balance: $%i", player.getMoney());
 
@@ -150,16 +150,69 @@ void Display::displayControls(Game& game) {
         ImGui::Text("Roll: %i", game.getDice());
 
         if (rollDouble) {
-            player.setJailStatus(false);
-            game.nextTurn();
+            player.setJailStatus(false);    // no longer jailed, allowed to move           
         }
         ImGui::EndDisabled();
+    }
+    ImGui::NewLine();
+
+    Space* currentSpace = game.getSpace(player.getPos());
+    
+    if (currentSpace->canBuy()) {
+        ImGui::Text("$%i", currentSpace->getCost());
+        if (ImGui::Button("Buy Property")) {
+            currentSpace->buy(&player);
+        }
     }
 
     if (ImGui::Button("End turn")) game.nextTurn();  // next player button
 
     ImGui::End(); // end controls window
 }
+
+
+// space information window function
+void Display::displaySpaceInfo(Game& game) {
+    ImGui::Begin("Space Information", NULL, window_flags);
+    if (selected != -1) {
+        // get space object
+        Space* currentSpace = game.getSpace(selected);
+
+        // render space details
+        ImGui::Text("%s", currentSpace->getName().c_str());
+
+        ImGui::Text("Colour:");
+        ImGui::SameLine();
+        ImGui::PushStyleColor(ImGuiCol_Text, currentSpace->getColourVec());
+        ImGui::Text("%s", currentSpace->getColour().c_str());
+        ImGui::PopStyleColor();
+
+        ImGui::Text("Type: %s", currentSpace->getType().c_str());
+        ImGui::NewLine();
+
+        Player* owner = currentSpace->getOwner();
+        if (owner) {
+            ImGui::Text("Owned By: %s", owner->getName().c_str());
+        }
+
+        if (currentSpace->getType() == "Property") {
+            Property* currentProperty = dynamic_cast<Property*>(currentSpace);
+            for (int i = 0; i < currentProperty->getHouseNum(); i++) {
+                ImGui::Text("H");
+                ImGui::SameLine();
+            }
+
+            if (currentProperty->canBuyHouse(&game.getPlayer())) {
+                if (ImGui::Button("Buy House")) {
+                    currentProperty->buyHouse(&game.getPlayer());
+                }
+            }
+        }
+
+    } else ImGui::Text("Please select a space");
+    ImGui::End();
+}
+
 
 // test/debug window function
 void Display::displayTest(Game& game) {
@@ -194,27 +247,6 @@ void Display::displayTest(Game& game) {
     ImGui::End();
 }
 
-// space information window function
-void Display::displaySpaceInfo(Game& game) {
-    ImGui::Begin("Space Information", NULL, window_flags);
-    if (selected != -1) {
-        // get space object
-        Space* currentSpace = game.getSpace(selected);
-
-        // render space details
-        ImGui::Text("%s", currentSpace->getName().c_str());
-
-        ImGui::Text("Colour:");
-        ImGui::SameLine();
-        ImGui::PushStyleColor(ImGuiCol_Text, currentSpace->getColourVec());
-        ImGui::Text("%s", currentSpace->getColour().c_str());
-        ImGui::PopStyleColor();
-
-        ImGui::Text("Type: %s", currentSpace->getType().c_str());
-
-    } else ImGui::Text("Please select a space");
-    ImGui::End();
-}
 
 // private board index helper
 int Display::idx(int row, int col) {

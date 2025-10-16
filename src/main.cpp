@@ -27,7 +27,7 @@ int main(int, char**) {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
     // Create window
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "Monopoly", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(1240, 800, "Monopoly", nullptr, nullptr);
     if (window == nullptr)
         return 1;
     glfwMakeContextCurrent(window);
