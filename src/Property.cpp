@@ -22,39 +22,39 @@ bool Property::payRent(Player* player){
     return false;
 }
 
-// method checks if player would like to buy house/hotel on property; returns true if player CAN buy house
-bool Property::buyHouse(Player* player){
-    // if property is not owned, cannot buy house/hotel
-    if(!isOwned) return false;
-
-    // check if current player owns this property
-    if(player->getProperties().find(this) != player->getProperties().end()){
-        // total number of houses/hotels
-        int totalHouses = rentPrice.size()-1;
-
-        // check if player owns all houses/hotels
-        if(numHouses==totalHouses){ return true; }
-
-        // ask if player would like to buy house/hotel
-        std::string houseOrHotel = (numHouses<rentPrice.size()-1) ? "house" : "hotel";
-        char choice;
-        std::cout << "Would you like to buy " << houseOrHotel << " for $" << houseCost << "? (y/n):";
-        std::cin >> choice;
-        if(choice=='y'){
-            player->subMoney(houseCost);    // decrease money by house/hotel cost
-            numHouses++;                    // increase count of number of owned houses/hotels
-            rent = rentPrice[numHouses];    // increase rent price
-        }
-
-        return true;
-    }
-    
-    // otherwise return false
-    return false;
-}
+// // method checks if player would like to buy house/hotel on property; returns true if player CAN buy house
+// bool Property::buyHouseOld(Player* player){
+//     // if property is not owned, cannot buy house/hotel
+//     if(!isOwned) return false;
+//
+//     // check if current player owns this property
+//     if(player->getProperties().find(this) != player->getProperties().end()){
+//         // total number of houses/hotels
+//         int totalHouses = rentPrice.size()-1;
+//
+//         // check if player owns all houses/hotels
+//         if(numHouses==totalHouses){ return true; }
+//
+//         // ask if player would like to buy house/hotel
+//         std::string houseOrHotel = (numHouses<rentPrice.size()-1) ? "house" : "hotel";
+//         char choice;
+//         std::cout << "Would you like to buy " << houseOrHotel << " for $" << houseCost << "? (y/n):";
+//         std::cin >> choice;
+//         if(choice=='y'){
+//             player->subMoney(houseCost);    // decrease money by house/hotel cost
+//             numHouses++;                    // increase count of number of owned houses/hotels
+//             rent = rentPrice[numHouses];    // increase rent price
+//         }
+//
+//         return true;
+//     }
+//
+//     // otherwise return false
+//     return false;
+// }
 
 // method checks if player would like to buy property; returns true if a player CAN buy property
-bool Property::buyProperty(Player* player){
+bool Property::buyPropertyOld(Player* player){
     // if property is owned, cannot buy property (mortgaged properties are always owned so don't need to check)
     if(isOwned) return false;
 
@@ -69,6 +69,42 @@ bool Property::buyProperty(Player* player){
 
     // player is able to buy property so return true
     return true;
+}
+
+// returns true if owner of property can buy another house/hotel
+bool Property::canBuyHouse(){
+    // if property is not owned, cannot buy house/hotel
+    if(!isOwned) return false;
+
+    // if player already owns all houses/hotels, cannot buy house/hotel
+    if(numHouses==rentPrice.size()-1) return false; 
+
+    return true;
+}
+
+// buys additional house/hotel
+void Property::buyHouse(){
+    // run check
+    if(canBuyHouse()){
+        owner->subMoney(houseCost);     // decrease money by house/hotel cost
+        numHouses++;                    // increase count of number of owned houses/hotels
+        rent = rentPrice[numHouses];    // increase rent price
+    } 
+}
+
+// returns true if owner of property can buy another house/hotel
+bool Property::canBuyProperty(){
+    // if property is owned, cannot buy property
+    if(isOwned) return false;
+
+    return true;
+}
+
+void Property::buyProperty(Player* player){
+    // run check
+    if(canBuyProperty()){
+        player->buyProperty(this);
+    }
 }
 
 // override pure virtual land function

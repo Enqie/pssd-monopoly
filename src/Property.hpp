@@ -26,10 +26,10 @@ private:
     bool payRent(Player* player);
 
     // method checks if player would like to buy house/hotel on property; returns true if player CAN buy house
-    bool buyHouse(Player* player);
+    // bool buyHouseOld(Player* player);
 
     // method checks if player would like to buy property; returns true if a player CAN buy property
-    bool buyProperty(Player* player);
+    bool buyPropertyOld(Player* player);
 
 public:
     // constructor sets name and colour of property
@@ -50,6 +50,12 @@ public:
     void setOwner(Player* newOwner){ owner = newOwner; }
     bool getOwned() { return isOwned; }
     int getHouseCost(){ return houseCost; }
+
+    // public buy functions
+    bool canBuyHouse();
+    void buyHouse();
+    bool canBuyProperty();
+    void buyProperty(Player* player);
 
     // override pure virtual functions
     void land(Player* player) override;
