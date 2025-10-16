@@ -48,6 +48,39 @@ void Player::buyUtility(Utility* utility){
     subMoney(utility->getCost());
 }
 
+// remove Property from owned list
+void Player::removeProperty(Property* property){
+    // ensure property exists in owned list
+    auto found = ownedProperties.find(property);
+    if(found == ownedProperties.end()) return;
+    
+    // erase from owned set
+    ownedProperties.erase(found);
+
+    // decrement property colour count
+    propertyColours.find(property->getColour())->second--;
+}
+
+// remove Railroad from owned list
+void Player::removeRailroad(Railroad* railroad){
+    // ensure railroad exists in owned list
+    auto found = ownedRailroads.find(railroad);
+    if(found == ownedRailroads.end()) return;
+    
+    // erase from owned set
+    ownedRailroads.erase(found);
+}
+
+// remove Utility from owned list
+void Player::removeUtility(Utility* utility){
+    // ensure utility exists in owned list
+    auto found = ownedUtilities.find(utility);
+    if(found == ownedUtilities.end()) return;
+    
+    // erase from owned set
+    ownedUtilities.erase(found);
+}
+
 // move spaces
 void Player::move(int spaces) {
     int boardSize = game->getBoardSize();

@@ -49,6 +49,10 @@ public:
     void buyRailroad(Railroad* railroad);
     void buyUtility(Utility* utility);
 
+    void removeProperty(Property* property);
+    void removeRailroad(Railroad* railroad);
+    void removeUtility(Utility* utility);
+
     void move(int spaces);  // move spaces
     void setPos(int pos);   // set player
     bool payBail();
