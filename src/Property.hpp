@@ -40,6 +40,7 @@ public:
         owner = nullptr;
         houseCost = house;
         rentPrice = rents;
+        rent = rentPrice[0];    // initialise rent price
     }
 
     // getters/setters
