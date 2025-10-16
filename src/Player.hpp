@@ -20,6 +20,7 @@ private:
     // booleans for player state
     bool isInJail = false;
     bool isBankrupt = false;
+    bool moveable = false;
 
     // container to store Properties/Utilities/Railroads owned by player
     std::unordered_set<Property*> ownedProperties;
@@ -42,6 +43,9 @@ public:
     void setJailStatus(bool status){ isInJail = status; }
     void setBankruptStatus(bool status){ isBankrupt = status; }
     int getPos(){ return position; }
+    // player movement
+    bool canMove() { return moveable; }
+    void setCanMove(bool in) { moveable = in; }
 
     // function declarations
     bool checkBankruptcy();

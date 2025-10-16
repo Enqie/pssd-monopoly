@@ -56,7 +56,7 @@ void Display::displayBoard(Game& game) {
                             selected = index;
                         }
 
-                        // get min and max of the most recently rendered item
+                        // get min and max coordinate of the most recently rendered item
                         ImVec2 min = ImGui::GetItemRectMin();
                         ImVec2 max = ImGui::GetItemRectMax();
                         int offset = 4;
@@ -68,13 +68,13 @@ void Display::displayBoard(Game& game) {
                         ImGui::TextWrapped(space->getName().c_str());
                         ImGui::PopTextWrapPos();
 
-                        for (Player& player : players) {                // overlay players onto the board
+                        for (Player& player : players) {                        // overlay players onto the board
                             if (index == player.getPos()) {
                                 ImU32 colour = IM_COL32(255, 255, 255, 255);    // default player colour
-                                if (&game.getPlayer() == &player) {     // colour the selected player
+                                if (&game.getPlayer() == &player) {             // colour the selected player
                                     colour = IM_COL32(0, 255, 255, 255);
                                 }
-                                ImGui::GetWindowDrawList()->AddText(    // add text overlay to the window
+                                ImGui::GetWindowDrawList()->AddText(            // add text overlay to the window
                                     ImVec2(min.x + offset, max.y - 18),
                                     colour,
                                     player.getName().c_str()
@@ -92,9 +92,14 @@ void Display::displayBoard(Game& game) {
         ImGui::EndTable();
         ImGui::End(); // end board window
 
-        displayControls(game);       // controls window
-        displaySpaceInfo(game);      // game space information window
-        displayTest(game);           // test window
+        displayControls(game);       // call controls window
+        displaySpaceInfo(game);      // call game space information window
+        displayTest(game);           // call test window
+
+        // ImGui Demo window
+        bool show_demo_window = true;
+        if (show_demo_window)
+            ImGui::ShowDemoWindow(&show_demo_window);
     }
 };
 
@@ -105,21 +110,29 @@ void Display::displayControls(Game& game) {
     // controls window code
     ImGui::Begin("Controls", NULL, window_flags);
 
-    if (ImGui::Button("Next player")) game.nextTurn();
+    //ImGui::SetWindowFontScale(1.36f);    // set font scale
+
+    ImGui::Text("%s's Turn!", player.getName().c_str());
+    ImGui::SameLine();
+    ImGui::Text("Balance: $%i", player.getMoney());
 
     if (!player.getJailStatus()) {
         // player is not in jail controls
-        static bool rollDouble = false; // dice controls
-        if (ImGui::Button("Roll Test")) rollDouble = game.rollDice();
+        static bool rollDouble = false;         // dice controls
+        ImGui::BeginDisabled(game.getDice());   // only allow one roll
+        if (ImGui::Button("Roll Dice")) rollDouble = game.rollDice();
+        ImGui::EndDisabled();
         ImGui::Text("Roll: %i", game.getDice());
         if (rollDouble) {
             ImGui::Text("Doubles!");
         }
-
+        ImGui::BeginDisabled(!player.canMove());    // disable button if player can't move
         if (ImGui::Button("Move")) {
-            player.move(game.getDice());    // move active player
-            selected = player.getPos();     // set selected square
+            player.move(game.getDice());            // move active player
+            selected = player.getPos();             // set selected square
         }
+        ImGui::EndDisabled();
+
     } else {
         // player is in jail controls
         ImGui::Text("You are in Jail!");
@@ -132,13 +145,19 @@ void Display::displayControls(Game& game) {
 
         // roll double to escape
         static bool rollDouble = false;
+        ImGui::BeginDisabled(game.getDice());
         if (ImGui::Button("Roll")) rollDouble = game.rollDice();
         ImGui::Text("Roll: %i", game.getDice());
+
         if (rollDouble) {
             player.setJailStatus(false);
             game.nextTurn();
         }
+        ImGui::EndDisabled();
     }
+
+    if (ImGui::Button("End turn")) game.nextTurn();  // next player button
+
     ImGui::End(); // end controls window
 }
 
@@ -150,8 +169,14 @@ void Display::displayTest(Game& game) {
 
     // debug information rendering
     ImGui::Begin("Debug window");
-    ImGui::Text("Players: %i, Current player: %s", game.getPlayerCount(), player.getName().c_str());
-    ImGui::Text("Player Balance: %i", player.getMoney());
+    
+    static int moveTo = 0;
+    ImGui::InputInt("moveto", &moveTo);
+    ImGui::SameLine();
+    if (ImGui::Button("Set Position")) player.setPos(moveTo);
+
+    ImGui::Text("Players: %i, Current player: %s, Move: %i", game.getPlayerCount(), player.getName().c_str(), player.canMove());
+    ImGui::Text("Player Balance: $%i", player.getMoney());
     ImGui::Text("Player position: %i/%i", pos, game.getBoardSize());
     ImGui::Text("Current Space: %s, Type: %s, Cost: $%i", space->getName().c_str(), space->getType().c_str(), space->getCost());
 

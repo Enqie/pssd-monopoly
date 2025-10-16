@@ -71,12 +71,6 @@ int main(int, char**) {
         // Call displays
         disp.displayBoard(game);
 
-        // ImGui Demo window
-        bool show_demo_window = true;
-        if (show_demo_window)
-            ImGui::ShowDemoWindow(&show_demo_window);
-
-
         // Rendering
         ImGui::Render();
         int display_w, display_h;

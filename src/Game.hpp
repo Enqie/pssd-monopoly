@@ -38,10 +38,15 @@ class Game {
     vector<Player>& getPlayerVec() { return players; }
     int getPlayerCount() { return playerCount; }
 
-    void nextTurn() { activePlayer = (activePlayer + 1) % playerCount; }
+    void nextTurn() {
+        activePlayer = (activePlayer + 1) % playerCount;    // set next player
+        roll = 0;                                           // reset dice roll
+    }
 
     // dice functions
     bool rollDice() {
+        getPlayer().setCanMove(true);                // can move after dice roll
+
         int dice1 = rand() % 6 + 1;
         int dice2 = rand() % 6 + 1;
         roll = dice1 + dice2;

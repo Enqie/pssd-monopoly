@@ -2,6 +2,7 @@
 
 // game initialisation. handles player and board assignments
 void Game::start(int p) {
+    srand(time(nullptr));  // RNG for dice rolls
 
     // clear players and add new players for player number
     players.clear();
@@ -50,6 +51,6 @@ void Game::start(int p) {
     addSpace(new Railroad("Short Line", 200));
     addSpace(new Tax("Chance", 200));
     addSpace(new Property("Park Place", "blue", 350, 200, {35,175,500,1100,1500}));
-    addSpace(new Tax("Income Tax", 200));
+    addSpace(new Tax("Luxury Tax", 75));
     addSpace(new Property("Boardwalk", "blue", 400, 200, {50,200,600,1400,2000}));
 }

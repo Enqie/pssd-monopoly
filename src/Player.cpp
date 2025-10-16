@@ -87,7 +87,7 @@ void Player::move(int spaces) {
     int pos = position + spaces;        // position without wrapping
     setPos(pos % boardSize);            // set position, modulus to wrap around the board
 
-    if (boardSize <= pos) {            // pass go check
+    if (boardSize <= pos) {             // pass go check
         this->addMoney(200);
     }
 };
@@ -98,6 +98,7 @@ void Player::setPos(int space) {
     // call land function for a space
     Space* newSpace = game->getSpace(space);
     newSpace->land(this);
+    this->setCanMove(false);            // player can't move twice
 }
 
 bool Player::payBail() {
