@@ -35,4 +35,6 @@ class Jail : public Space {
   }
 
   std::string getType() override { return "Jail"; }
+
+  ImVec4 getColourVec() override { return ImVec4(0.6f, 0.0f, 0.0f, 1.0f); }
 };

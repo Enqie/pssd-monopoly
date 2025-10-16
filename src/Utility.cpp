@@ -64,7 +64,7 @@ bool Utility::canBuyUtility(){
 
 // runs buy function
 void Utility::buyUtility(Player* player){
-    if(canBuyUtility) player->buyUtility(this);
+    if(canBuyUtility()) player->buyUtility(this);
 }
 
 

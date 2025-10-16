@@ -41,14 +41,8 @@ public:
     }
 
     // getters/setters
-    std::string getColour(){ return colour; }
-    // int getPropertyCost(){ return propertyCost[numHouses]; }
-    // void setHousePrice(std::vector<int> newCost){propertyCost = newCost;}
-    // void setRentPrice(std::vector<int> newRentPrice){rentPrice = newRentPrice;}
     void setOwner(Player* newOwner){ owner = newOwner; }
     bool getOwned() { return isOwned; }
-    int getHouseCost(){ return houseCost; }
-
     void setNotOwned();     // reset Property ownership 
     
     // method makes player pay rent if they do not own this property; returns true if player pays rent
@@ -59,6 +53,7 @@ public:
     void buyHouse();
     bool canBuyProperty();
     void buyProperty(Player* player);
+    int getHouseCost(){ return houseCost; }
 
     // override pure virtual functions
     void land(Player* player) override;
@@ -66,5 +61,7 @@ public:
 
     int getCost() override { return cost; }
 
+    // get colours
     ImVec4 getColourVec() override;
+    std::string getColour() override { return colour; }
 };

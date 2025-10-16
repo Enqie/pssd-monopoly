@@ -20,7 +20,9 @@ public:
 
     virtual std::string getType() = 0;      // pure virtual function to get space type
 
-    virtual int getCost() { return 0; }     // function to get property cost, returns 0 if not overridden by a child class
+    virtual int getCost() { return -1; }     // function to get property cost, returns -1 if not overridden by a child class
 
+    // virtual functions for returning colour with defaults
+    virtual std::string getColour() { return "N/A"; }
     virtual ImVec4 getColourVec() { return ImVec4(0.5f, 0.5f, 0.5f, 0.5f); }
 };

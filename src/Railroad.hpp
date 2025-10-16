@@ -42,4 +42,6 @@ public:
     // override pure virtual functions
     void land(Player* player) override;
     std::string getType() override { return "Railroad"; };
+
+    ImVec4 getColourVec() override { return ImVec4(0.1f, 0.1f, 0.1f, 1.0f); }
 };

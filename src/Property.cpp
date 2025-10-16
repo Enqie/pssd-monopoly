@@ -138,7 +138,7 @@ ImVec4 Property::getColourVec() {
         {"red", ImVec4(0.9f, 0.1f, 0.1f, 1.0f)},
         {"yellow", ImVec4(1.0f, 0.9f, 0.0f, 1.0f)},
         {"green", ImVec4(0.1f, 0.7f, 0.4f, 1.0f)},
-        {"blue", ImVec4(0.0f, 0.5f, 0.7f, 1.0f)}
+        {"blue", ImVec4(0.0f, 0.4f, 0.6f, 1.0f)}
     };
 
 

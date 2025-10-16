@@ -63,18 +63,12 @@ bool Railroad::canBuyRailroad(){
 
 // runs buy function
 void Railroad::buyRailroad(Player* player){
-    if(canBuyRailroad) player->buyRailroad(this);
+    if(canBuyRailroad()) player->buyRailroad(this);
 }
 
 
 // override pure virtual land function
 void Railroad::land(Player* player){
-    // // rent cannot be collected on a mortgaged property; mortgaged properties are still owned so return
-    // if(isMortgaged) return;
-
     // if rent is paid, nothing else must be done so return
     if(Railroad::payRent(player)) return;
-
-    // otherwise property is not owned, check if player would like to buy property
-    //if(Railroad::buyProperty) return;
 }

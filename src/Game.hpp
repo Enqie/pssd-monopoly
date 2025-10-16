@@ -35,6 +35,7 @@ class Game {
 
     // player getters
     Player& getPlayer() { return players[activePlayer]; }
+    vector<Player>& getPlayerVec() { return players; }
     int getPlayerCount() { return playerCount; }
 
     void nextTurn() { activePlayer = (activePlayer + 1) % playerCount; }

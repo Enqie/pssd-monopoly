@@ -7,9 +7,15 @@
 class Display {
     private:
     ImGuiWindowFlags window_flags = 0;
+    int selected = -1;
+
     int idx(int row, int col);
-    public:
-    void displayBoard(Game& game);
+
+    // individual window functions
     void displayTest(Game& game);
     void displayControls(Game& game);
+    void displaySpaceInfo(Game& game);
+
+    public:
+    void displayBoard(Game& game);  // main display function
 };

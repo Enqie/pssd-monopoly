@@ -1,9 +1,16 @@
 #include "Display.hpp"
 
+// main board window function. calls other windows
 void Display::displayBoard(Game& game) {
     // define local static vars
     static int playerCount = 2;
     static bool newGame = true;
+
+    // ImGui styling
+    ImGuiStyle& style = ImGui::GetStyle();
+    style.FrameBorderSize = 1.0f;
+    style.CellPadding = ImVec2(0, 0);
+    style.FontSizeBase = 11;
 
     // define window flags
     window_flags |= ImGuiWindowFlags_NoTitleBar;
@@ -30,12 +37,11 @@ void Display::displayBoard(Game& game) {
     if (!newGame) {
         ImGui::Begin("Board", NULL, window_flags); // create board window
 
-
-
-        // board table
+        // board rendering
         if (ImGui::BeginTable("Board", 11, ImGuiTableFlags_SizingFixedSame)) {
+            vector<Player>& players = game.getPlayerVec();     // get current player object
             static int index;
-            for (int row = 0; row < 11; ++row) {
+            for (int row = 0; row < 11; ++row) {    // board create loop
                 ImGui::TableNextRow();
                 for (int col = 0; col < 11; ++col) {
                     ImGui::TableNextColumn();
@@ -45,7 +51,38 @@ void Display::displayBoard(Game& game) {
 
                         ImGui::PushID(index);
                         ImGui::PushStyleColor(ImGuiCol_Button, space->getColourVec());  // colour
-                        ImGui::Button(space->getName().c_str(), ImVec2(60,60));
+
+                        if (ImGui::Button("", ImVec2(70,70))) {   // when clicked, update selected square to display on info window
+                            selected = index;
+                        }
+
+                        // get min and max of the most recently rendered item
+                        ImVec2 min = ImGui::GetItemRectMin();
+                        ImVec2 max = ImGui::GetItemRectMax();
+                        int offset = 4;
+
+                        // text wrapping
+                        float padding = 4.0f;
+                        ImGui::SetCursorScreenPos(ImVec2(min.x + padding, min.y + padding));
+                        ImGui::PushTextWrapPos(max.x - padding);
+                        ImGui::TextWrapped(space->getName().c_str());
+                        ImGui::PopTextWrapPos();
+
+                        for (Player& player : players) {                // overlay players onto the board
+                            if (index == player.getPos()) {
+                                ImU32 colour = IM_COL32(255, 255, 255, 255);    // default player colour
+                                if (&game.getPlayer() == &player) {     // colour the selected player
+                                    colour = IM_COL32(0, 255, 255, 255);
+                                }
+                                ImGui::GetWindowDrawList()->AddText(    // add text overlay to the window
+                                    ImVec2(min.x + offset, max.y - 18),
+                                    colour,
+                                    player.getName().c_str()
+                                );
+                                offset += 16;
+                            }
+                        }
+
                         ImGui::PopID();
                         ImGui::PopStyleColor();
                     }
@@ -55,11 +92,13 @@ void Display::displayBoard(Game& game) {
         ImGui::EndTable();
         ImGui::End(); // end board window
 
-        displayControls(game);  // controls window
-        displayTest(game);      // test window
+        displayControls(game);       // controls window
+        displaySpaceInfo(game);      // game space information window
+        displayTest(game);           // test window
     }
 };
 
+// controls window function
 void Display::displayControls(Game& game) {
     Player& player = game.getPlayer(); // get current player object
 
@@ -77,7 +116,10 @@ void Display::displayControls(Game& game) {
             ImGui::Text("Doubles!");
         }
 
-        if (ImGui::Button("Move")) player.move(game.getDice()); // move active player
+        if (ImGui::Button("Move")) {
+            player.move(game.getDice());    // move active player
+            selected = player.getPos();     // set selected square
+        }
     } else {
         // player is in jail controls
         ImGui::Text("You are in Jail!");
@@ -100,11 +142,13 @@ void Display::displayControls(Game& game) {
     ImGui::End(); // end controls window
 }
 
+// test/debug window function
 void Display::displayTest(Game& game) {
     Player& player = game.getPlayer(); // get current player object
     int pos = player.getPos();
     Space* space = game.getSpace(pos);
 
+    // debug information rendering
     ImGui::Begin("Debug window");
     ImGui::Text("Players: %i, Current player: %s", game.getPlayerCount(), player.getName().c_str());
     ImGui::Text("Player Balance: %i", player.getMoney());
@@ -115,13 +159,35 @@ void Display::displayTest(Game& game) {
     if (!game.getBoardSize()) { 
         ImGui::Text("Board is empty!");
     } else {
-        for (int i = 0; i < game.getBoardSize(); i++) { // TODO: actually render the board
+        for (int i = 0; i < game.getBoardSize(); i++) {
             Space* space = game.getSpace(i);
             if (space) {
                 ImGui::Text("Space %d: %s", i, space->getName().c_str());
             }
         }
     }
+    ImGui::End();
+}
+
+// space information window function
+void Display::displaySpaceInfo(Game& game) {
+    ImGui::Begin("Space Information", NULL, window_flags);
+    if (selected != -1) {
+        // get space object
+        Space* currentSpace = game.getSpace(selected);
+
+        // render space details
+        ImGui::Text("%s", currentSpace->getName().c_str());
+
+        ImGui::Text("Colour:");
+        ImGui::SameLine();
+        ImGui::PushStyleColor(ImGuiCol_Text, currentSpace->getColourVec());
+        ImGui::Text("%s", currentSpace->getColour().c_str());
+        ImGui::PopStyleColor();
+
+        ImGui::Text("Type: %s", currentSpace->getType().c_str());
+
+    } else ImGui::Text("Please select a space");
     ImGui::End();
 }
 

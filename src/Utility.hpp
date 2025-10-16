@@ -10,7 +10,6 @@ class Utility: public Space
 private:
     // Utility states
     bool isOwned = false;
-    // bool isMortgaged = false;
 
     // Utility information
     Player* owner;
@@ -42,4 +41,6 @@ public:
     // override pure virtual land function
     void land(Player* player) override;
     std::string getType() override { return "Utility"; };
+
+    ImVec4 getColourVec() override { return ImVec4(0.2f, 0.2f, 0.6f, 1.0f); }
 };
