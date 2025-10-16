@@ -1,0 +1,34 @@
+Stage 1: Console based protoype:
+- our project was highly dependent on gui and interface, however we wanted to get a simple console version of monopoly first which foucused on getting the basic logic and rules mentioned i
+  in our scope working
+At our first attempt at trying the game, we had:
+1. the board layout was being printed in text form, listing each space by name and index.
+2. The player can roll, move accordingly and then video information about the space they are on.
+    eg: they will be told they are on x/13- this was stating which position they were on. 
+3. core systems were implemented: such as player balance, cost and jail counts
+    - it will also tell them how much they have 
+    - and how much a space costs
+4. command buttons were made: next player, roll, buy and move. 
+This version of our game confirmed that movement and player state logic functioned properly 
+
+Stage 2:ImGui
+- in this stage, we developed a graphical interface using ImGui. This step took our console game project into a visual protoype monoply with clear layout and colour groups
+Some of the key updates include:
+1. A  fully rendered monoply board showing all forty spaces in their correct order. 
+    - we have a complete 40-tile monopoly board, with all property groups placed around the edges.
+2. each tile is colour coded to match its property 
+3. a side panel is provided for user controls- same from stage 1. 
+4. a debug window displayed live values for plyer/s balance, current space and movement. 
+5. support for multiple players was added, so players can alternate and play.
+this stage was a milestone. it marked the transition our team was able to change our text based game to a visully complete board, with combined logic and interactive GUI.
+
+Stage 3: Functional and complete (?)
+- this is the point we feel like we have a fully interactive game, with working logic, controls and UI feedback.
+What we achieved in this stage:
+1. player tokes (P1 and P2) can move accurately on the board according to respective dice rolls. 
+2. the Go to jail or the jail system operates correctly, players are sent to jail, movement restrictions apply and if and when the bail condiitons are met, they can return 
+3, Since jail disables movement or buying options, the game now can control the apperance, disapperance and player status dynamically based on their state.
+4. Each board tile is clickable, with an instantly updating panel displaying the tiles' name, colour group and type. 
+4. the turn system is functional, allowing players to smoothly take turns and alternate. 
+
+
