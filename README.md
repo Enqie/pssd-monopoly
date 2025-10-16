@@ -4,9 +4,9 @@ Clone repository with `--recursive` flag (or `git submodule update --init` after
 
 Requires libglfw3 which can be installed by running `sudo apt-get install libglfw3 libglfw3-dev`
 
-To compile the project, run `make` in the terminal.
+To compile the project, run `make`
 
-To run the game, run `./monopoly.out` in the terminal.
+To run the game, run `./monopoly.out`
 
 # Monopoly Rules
 ## Rules
