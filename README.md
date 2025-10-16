@@ -1,4 +1,4 @@
-# **Linux compatibility only. Developed and tested on Ubuntu WSL.**
+# \*\*Linux compatibility only. Developed and tested on Ubuntu WSL.\*\*
 # Installing, compiling and running
 Clone repository with `--recursive` flag (or `git submodule update --init` after cloning) to ensure imgui is included.
 
