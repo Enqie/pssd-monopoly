@@ -36,8 +36,11 @@ Whenever a player lands or passes Go (with the exception of when the player goes
 #### Buying Site
 If a player lands on an unowned Site, they have the choice to buy it. There are three types of Sites - Properties, Utilities and Railroads. If the player chooses to buy the Site, they pay the stated amount and now own the Site. If the player does not choose to buy the site, their turn ends. The player who owns of any Site collects rent from any other player who lands on that Site. Owners of the Site do not pay rent.
 
+#### Buying houses on owned Properties
+On your turn, you may choose to buy up to three houses and a hotel on any property you own by selecting the relevant space and selecting the "Buy House" option. Each house or hotel is represented by an additional "H" on the space. Buying a house or hotel increases the rent for any other player who lands on the property. 
+
 #### Landing on owned Properties
-Landing on a property you own gives you the option to buy a house or hotel on it. Buying a house or hotel increases the rent for any other player who lands on the property. The owner of a Property can buy one house whenever they land on their Property up to a total of three houses on a Property, after which they can buy and one hotel. If you land on a property you do not own, you must pay rent to the owner of the property.
+If you land on a property you do not own, you must pay rent to the owner of the property. The rent paid depends on the number of houses the owner has on the property.
 
 #### Landing on owned Utilities
 The rent paid when landing on an owned Utility depends on the player's dice roll. If the owner has only one of the Utilities, the rent will be four times the dice roll. If, however, both Utilities are owned by the same player, the rent paid is ten times the amount of the dice roll.
