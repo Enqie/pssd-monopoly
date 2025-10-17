@@ -10,8 +10,6 @@ class Railroad: public Space
 private:
     // Railroad states
     bool isOwned = false;
-    // bool isMortgaged = false;
-
     // Railroad information
     Player* owner;
     int cost;

@@ -5,7 +5,7 @@
 class GoToJail : public Space
 {
 private:
-    int jail = 8; // set jail index
+    int jail = 10; // set jail index
 public:
     GoToJail(): Space("Go To Jail"){}
 

@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Player.hpp"
 #include "Game.hpp"
 
@@ -18,11 +19,6 @@ void Player::buyProperty(Property* property){
 
     // add property to list of owned properties
     ownedProperties.insert(property);
-
-    // update list of owned property colours
-    // auto found = propertyColours.find(property->getColour());
-    // if(found != propertyColours.end()) found->second++;
-    // else propertyColours.insert({property->getColour(), 1});
 
     // decrease money of player by cost of buying
     subMoney(property->getCost());
@@ -48,39 +44,6 @@ void Player::buyUtility(Utility* utility){
 
     // decrease money of player by cost of buying
     subMoney(utility->getCost());
-}
-
-// remove Property from owned list
-void Player::removeProperty(Property* property){
-    // ensure property exists in owned list
-    auto found = ownedProperties.find(property);
-    if(found == ownedProperties.end()) return;
-    
-    // erase from owned set
-    ownedProperties.erase(found);
-
-    // decrement property colour count
-    propertyColours.find(property->getColour())->second--;
-}
-
-// remove Railroad from owned list
-void Player::removeRailroad(Railroad* railroad){
-    // ensure railroad exists in owned list
-    auto found = ownedRailroads.find(railroad);
-    if(found == ownedRailroads.end()) return;
-    
-    // erase from owned set
-    ownedRailroads.erase(found);
-}
-
-// remove Utility from owned list
-void Player::removeUtility(Utility* utility){
-    // ensure utility exists in owned list
-    auto found = ownedUtilities.find(utility);
-    if(found == ownedUtilities.end()) return;
-    
-    // erase from owned set
-    ownedUtilities.erase(found);
 }
 
 // remove all owned Properties
@@ -135,23 +98,26 @@ void Player::move(int spaces) {
 void Player::setPos(int space) {
     position = space;
 
-    // call land function for a space
+    // call "land" function for a space
     Space* newSpace = game->getSpace(space);
     newSpace->land(this);
-    this->setCanMove(false);            // player can't move twice
+    this->setCanMove(false);    // player can't move twice
 }
 
+// player requests to pay bail
 bool Player::payBail() {
-    if (isInJail) {
+    if (isInJail) {                     // can't pay bail if not in jail
         this->subMoney(50);
-        this->setJailStatus(false);
+        this->setJailStatus(false);     // out of jail, can roll again to move
         return true;
     } else return false;
 }
 
+// subtract money from players account
 void Player::subMoney(int amount) {
     money-=amount; 
     if (checkBankruptcy()) {
+        // bankruptcy check & logic
         std::cout << game->getPlayer().getName() << " has gone bankrupt!" << std::endl;
         resetAllOwnedSpaces();
         game->deletePlayer(game->getPlayerIdx());

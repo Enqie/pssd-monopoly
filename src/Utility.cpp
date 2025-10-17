@@ -36,7 +36,6 @@ void Utility::payRent(Player* player){
 void Utility::setNotOwned(){
     if(!isOwned) return;
     isOwned = false;
-    // owner->removeUtility(this);
 }
 
 // checks if player can buy Utility

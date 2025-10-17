@@ -11,7 +11,7 @@ class Display {
 
     int idx(int row, int col);
 
-    // individual window functions
+    // individual window functions, called within displayBoard
     void displayTest(Game& game);
     void displayControls(Game& game);
     void displaySpaceInfo(Game& game);

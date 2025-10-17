@@ -50,12 +50,12 @@ class Game {
 
     // dice functions
     bool rollDice() {
-        getPlayer().setCanMove(true);                // can move after dice roll
+        getPlayer().setCanMove(true);       // can move after dice roll
 
-        int dice1 = rand() % 6 + 1;
+        int dice1 = rand() % 6 + 1;         // two random dice rolls
         int dice2 = rand() % 6 + 1;
-        roll = dice1 + dice2;
-        if (dice1 == dice2) return true;
+        roll = dice1 + dice2;               // add them together
+        if (dice1 == dice2) return true;    // doubles check
         return false;
     }
     int getDice() { return roll; }

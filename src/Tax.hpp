@@ -12,7 +12,7 @@ public:
     Tax(std::string name, int taxAmount): Space(name), taxAmount(taxAmount){}
 
     void land(Player* player){
-        player->subMoney(taxAmount);
+        player->subMoney(taxAmount);    // subtract tax when landed on
     }
 
     std::string getType() override { return "Tax"; }

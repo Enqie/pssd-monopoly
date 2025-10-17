@@ -9,9 +9,8 @@ using namespace std;
 
 class Jail : public Space {
  private:
-  const int bailAmount = 50;  // amount required to pay
-  const int maxTurns = 3;  // 3 turns a player is forced to say in jail till a
-                           // double is rolled or forced payment
+  const int bailAmount = 50;      // amount required to pay
+  const int maxTurns = 3;         // max 3 turns to roll a double
   unordered_map<Player*, int> jailTurns;  // track the turns
 
  public:
@@ -23,7 +22,7 @@ class Jail : public Space {
   }
 
   // getters and incrementers for turns a player has been in jail
-  bool canRoll(Player* player) { return jailTurns[player] < maxTurns; }
+  bool canRoll(Player* player) { return jailTurns[player] < maxTurns; }   // player can roll if maxTurns hasn't been reached
   void addTurn(Player* player) { jailTurns[player] += 1; }
   int getTurns(Player* player) { return jailTurns[player]; }
   int getMaxTurns() { return maxTurns; }

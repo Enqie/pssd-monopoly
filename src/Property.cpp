@@ -16,7 +16,6 @@ void Property::setNotOwned(){
     isOwned = false;                // set isOwned to false
     rent = rentPrice[0];            // reset rent price to initial
     numHouses = 0;                  // reset number of houses
-    // owner->removeProperty(this);    // remove this property from player's list of owned property
 }
 
 // returns true if owner of property can buy another house/hotel
@@ -50,7 +49,7 @@ bool Property::canBuy() {
 
 void Property::buy(Player* player) {
     if (!isOwned) {
-        player->buyProperty(this);
+        player->buyProperty(this);      // property gets sent to player buy function
         isOwned = true;
     }
 }
@@ -62,6 +61,7 @@ void Property::land(Player* player){
     }
 }
 
+// turns colour strings into colour vectors!
 ImVec4 Property::getColourVec() {
     static const std::unordered_map<std::string, ImVec4> colorMap = {
         {"purple", ImVec4(0.4f, 0.0f, 0.7f, 1.0f)},
@@ -73,7 +73,5 @@ ImVec4 Property::getColourVec() {
         {"green", ImVec4(0.1f, 0.7f, 0.4f, 1.0f)},
         {"blue", ImVec4(0.0f, 0.4f, 0.6f, 1.0f)}
     };
-
-
     return colorMap.find(colour)->second;
 }

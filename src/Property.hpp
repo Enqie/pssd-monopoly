@@ -22,9 +22,6 @@ private:
 
 public:
     // constructor sets name and colour of property
-    // Property(std::string name, std::string colour, int cost): Space(name), colour(colour), cost(cost) {
-    //     owner = nullptr;
-    // }
     Property(std::string name, std::string colour, int cost, int house, std::vector<int> rents): Space(name), colour(colour), cost(cost) {
         owner = nullptr;
         houseCost = house;

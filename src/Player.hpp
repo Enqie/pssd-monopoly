@@ -62,10 +62,6 @@ public:
     void buyRailroad(Railroad* railroad);
     void buyUtility(Utility* utility);
 
-    void removeProperty(Property* property);    // remove specified property from owned
-    void removeRailroad(Railroad* railroad);    // remove specified railroad from owned
-    void removeUtility(Utility* utility);       // remove specified utility from owned
-
     void clearOwnedProperty();  // reset owned property
     void clearOwnedRailroad();  // reset owned railroad
     void clearOwnedUtility();   // reset owned utility
@@ -73,7 +69,7 @@ public:
     void resetAllOwnedSpaces(); // reset status of all owned spaces
 
     void move(int spaces);  // move spaces
-    void setPos(int pos);   // set player
+    void setPos(int pos);   // set player position
     bool payBail();
 
     // methods to add or subtract amounts of money from player

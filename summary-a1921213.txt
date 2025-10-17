@@ -1,0 +1,20 @@
+Contribution:
+My responsibilities in the development of this project were to design the User Interface for the game, and bring together all of the classes and components to produce a final product.
+On top of the Display class, I ended up needing to write numerous functions and modify the classes and functions made by other group members to get everything integrated into the GUI.
+I don't think there was a class I did not touch at some point in the development timeline. I started off the project creating the initial project structure, then worked on ImGui setup
+and getting the makefile working. I also implemented board logic and game controls, new game initialisation, player moving and landing, the GoToJail space, bankruptcy and win logic,
+as well as everything shown on the GUI. Special thanks to Kimmy for providing the player, game and space classes for me to build off.
+
+Learning Experience:
+During this project I learned a lot about using object pointers and virtual functions to override logic depending on the state of the game. Being in charge of UI, it was an interesting
+challenge working with the different object references and pointers, making sure things were defined properly in each scope, and avoiding circular dependencies. I learned about forward
+class definitions, dynamic casting, unique pointers, and expanded my knowledge on data structures like maps. Outside of programming, I learnt that good communication is essential for
+teamwork to work well.
+
+Reflection:
+In hindsight it would've been a better idea to take some time and teach my team members how ImGui works so that they could have a better idea on what was needed in the functions and
+classes they created, as well as being able to implement some of the UI themselves. Since I've had experience working on projects of a similar style in the past, as well as using UI
+libraries like ImGui, it fell pretty much solely to me to implement the interface, but that could've been avoided if I had been a little more clear on how the implementation would go.
+In general I think our biggest weakness as a group was a lack of good communication, which I was also guilty of. Our collaboration did improve as the end of the project drew nearer,
+but it really would've benefitted from a bit more delegation and collaborative work. We did have a handful of in-person and online meetings, and although these did help to sharpen our
+overall direction, there really wasn't enough certainty when it came to the details. Overall though, I am really proud of our efforts and how the final product has come out.

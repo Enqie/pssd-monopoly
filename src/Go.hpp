@@ -4,8 +4,6 @@
 
 class Go: public Space
 {
-private:
-    /* data */
 public:
     Go(): Space("Go"){}
 

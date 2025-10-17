@@ -8,10 +8,9 @@ class Player;
 class Space
 {
 protected:
-    std::string name;           // name of space
+    std::string name;   // name of space
 public:
     // constructors
-    Space(/* args */){}
     Space(std::string name) : name(name) {}
     virtual ~Space() {}
 
