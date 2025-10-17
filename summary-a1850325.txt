@@ -1,0 +1,18 @@
+Individual Contribution and reflection:
+- For our Monopoly project, I was assigned to the geologic and ensuring that gel space was functioning properly as per the rules.
+    I was required to connect players status,handling turns and conditional logic in a way that when a person was sent to jail, the movement and decisions were restricted as they needed to be.
+    I developed the functionality where it tracks how many turns a player has been in jail, provide options for release- paying bail or waiting turns and ensure they dont perform actions like buying properties or invest while in jail. 
+
+- When tasks were shared originally, i was assigned to either assist in space derived classes. However these components were already completed by another member before i could have attempted. 
+- i was then given responsibility of the jail logic, to which i integrated and ensured it was correct with the player states and eventually interface.
+Through my contribution i was able to use space and player classes and making sure then when UI comes in play, these can be controlled to dynmaically apperar or go away.
+
+
+Learning experience and reflection:
+Working up in jail logic helped me deep in my understanding of object oriented design and state management in a game environment. I gained confidence in modifying and expanding someone else's code base which I initially found challenging.
+This experience taught me how to carefully trace interactions between system systems using linking backend logic. 
+
+On a personal level, I found this project with rewarding and challenging. There were times where I felt useless compared to the matter where my other team members were doing, especially early on when many of the magic components work already completed or designated to specific person.
+It was difficult to not feel left behind, but it also motivated me to step up, take ownership of what I could do and deliver and I did do that. Looking back our team definitely could have delegated task more evenly communicated more clearly about progress to ensure that everyone had consistent workload and opportunities to contribute evenly.
+
+Overall, this project has provided a good learning experience in both technical skills and teamwork for me. I develop confidence in contributing will also still needing to work on speaking up and asking for more work even when the circumstances changed. We can definitely do better planning and task distribution that can allow our monopoly to improve.
