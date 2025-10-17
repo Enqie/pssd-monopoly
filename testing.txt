@@ -1,6 +1,5 @@
 Stage 1: Console based protoype:
-- our project was highly dependent on gui and interface, however we wanted to get a simple console version of monopoly first which foucused on getting the basic logic and rules mentioned i
-  in our scope working
+- our project was highly dependent on gui and interface, however we wanted to get a simple console version of monopoly first which foucused on getting the basic logic and rules mentioned in our scope working
 At our first attempt at trying the game, we had:
 1. the board layout was being printed in text form, listing each space by name and index.
 2. The player can roll, move accordingly and then video information about the space they are on.
@@ -27,8 +26,9 @@ Stage 3: Functional and complete (?)
 What we achieved in this stage:
 1. player tokes (P1 and P2) can move accurately on the board according to respective dice rolls. 
 2. the Go to jail or the jail system operates correctly, players are sent to jail, movement restrictions apply and if and when the bail condiitons are met, they can return 
+    - The debug panel was used to move the position of P1 to random positions on the board and then to the Go To Jail space to ensure P1 would not gain $200 by passing Go.
 3, Since jail disables movement or buying options, the game now can control the apperance, disapperance and player status dynamically based on their state.
-4. Each board tile is clickable, with an instantly updating panel displaying the tiles' name, colour group and type. 
+4. Each board tile is clickable, with an instantly updating panel displaying the tiles' name, colour group, type, if it can be owned, and the owner. 
 4. the turn system is functional, allowing players to smoothly take turns and alternate. 
 
 
