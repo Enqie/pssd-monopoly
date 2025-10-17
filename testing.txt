@@ -123,3 +123,138 @@ Controls UI changes to roll and pay
 Roll produces random number, button deactivates. Pay button activates.
 Rent is paid. P2 -roll*4 balance, P1 +roll*4 balance.
 SUCCESS
+
+
+Jail/Go To Jail player position Test 1: A single player goes to jail test
+- Input
+P1 lands on Go To Jail (position 30)
+
+- Expected output
+Position of P1 is set to the Jail space. 
+
+- Actual output
+Position of P1 is set to the Jail space. 
+SUCCESS
+
+Jail/Go To Jail player position Test 2: Testing no move can be made after being sent to jail
+- Input
+P1 rolls dice
+P1 lands on Go To Jail (position 30)
+
+- Expected output
+Position of P1 is set to the Jail space. 
+Player cannot make any other move (player's turn is considered to be over after being sent to jail)
+
+- Actual output
+Position of P1 is set to the Jail space. 
+Player can pay bail to get out of jail but cannot roll. After paying bail, player cannot make any other move. Effectively, the player cannot make any other move.
+SUCCESS ?
+
+Jail/Go To Jail player position Test 3: Testing paying bail immediately after being sent to jail
+- Input
+P1 rolls dice
+P1 lands on Go To Jail (position 30)
+P1 pays bail
+P1 ends turn
+P2 ends turn
+P1 rolls dice
+P1 moves
+
+- Expected output
+Position of P1 is set to the Jail space. 
+P1's balance decreases by 50.
+After P2 ends their turn, P1 able to roll dice and move to respective space.
+
+- Actual output
+Position of P1 is set to the Jail space. 
+P1's balance decreases by 50.
+After P2 ends their turn, P1 able to roll dice and move to respective space.
+SUCCESS
+
+Jail/Go To Jail player position Test 4: Testing paying bail one turn after being sent to jail
+- Input
+P1 rolls dice
+P1 lands on Go To Jail (position 30)
+P1 ends turn
+P2 ends turn
+P1 pays bail
+P1 rolls dice
+P1 moves
+
+- Expected output
+Position of P1 is set to the Jail space. 
+After P2 ends their turn, P1's balance decreases by 50 and P1 able to roll dice and move to respective space.
+
+- Actual output
+Position of P1 is set to the Jail space. 
+After P2 ends their turn, P1's balance decreases by 50 and P1 able to roll dice and move to respective space.
+SUCCESS
+
+Jail/Go To Jail player position Test 5: multiple players sent to jail
+- Input
+P1 rolls dice
+P1 lands on Go To Jail (position 30)
+P1 ends turn
+P2 rolls dice
+P2 lands on Go To Jail (position 30)
+P2 ends turn
+P3 rolls dice
+P3 lands on Go To Jail (position 30)
+P3 ends turn
+
+- Expected output
+Position of P1 is set to the Jail space. 
+Position of P2 is set to the Jail space. 
+Position of P3 is set to the Jail space. 
+Players are unable to take any action other than pay bail immediately after being sent to jail.
+
+- Actual output
+Position of P1 is set to the Jail space. 
+Position of P2 is set to the Jail space. 
+Position of P3 is set to the Jail space. 
+Players are unable to take any action other than pay bail immediately after being sent to jail.
+SUCCESS
+
+Jail/Go To Jail Test 6: Roll double to get out of jail
+- Input
+P1 rolls dice and lands on Go To Jail
+P2 ends turn
+P1 rolls double and moves to relevant space
+
+- Expected output
+Position of P1 is set to the Jail space. 
+After P2 ends turn, P1 rolls for a double and moves the relevant amount of spaces.
+
+- Actual output
+Position of P1 is set to the Jail space. 
+After P2 ends turn, P1 rolls for a double and moves the relevant amount of spaces.
+SUCCESS
+
+
+Tax (+ Chance/Community Chest) Test 1: Tax space functionality for a single player test
+- Input
+P1 lands on Income Tax space (position 4)
+
+- Expected output
+P1 at position 4. P1's money decreased by 200. 
+
+- Actual output
+P1 at position 4. P1's money decreased by 200. 
+SUCCESS
+
+Tax (+ Chance/Community Chest) Test 2: tax space functionality for a multiple players test
+- Input
+P1 rolls dice
+P1 lands on Income Tax space (position 4)
+P2 rolls dice
+P2 lands on Income Tax space (position 4)
+
+- Expected output
+P1 at position 4. P1's balance decreased by 200. 
+P2 at position 4. P2's balance decreased by 200. 
+
+- Actual output
+P1 at position 4. P1's balance decreased by 200. 
+P2 at position 4. P2's balance decreased by 200. 
+SUCCESS
+
