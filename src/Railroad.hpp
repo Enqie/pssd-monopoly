@@ -18,7 +18,7 @@ private:
 
     // private methods
     // method makes player pay rent if they do not own this railroad; returns true if player pays rent
-    bool payRent(Player* player);
+    void payRent(Player* player);
 
     // method checks if player would like to buy railroad; returns true if a player CAN buy 
     bool buyProperty(Player* player);

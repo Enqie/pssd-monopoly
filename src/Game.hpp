@@ -26,6 +26,8 @@ class Game {
     Game() : activePlayer(0), playerCount(0), roll(0) {} // constructor, initialises ints
     void start(int p);
 
+    Game& getGame() { return *this; }
+
     // get and add space
     Space* getSpace(int i) { return board[i].get(); }
     void addSpace(Space* space) { board.emplace_back(space); }

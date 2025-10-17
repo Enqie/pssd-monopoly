@@ -7,5 +7,5 @@ void GoToJail::land(Player* player){
     player->setPos(10);
     player->setJailStatus(true);
 
-    std::cout << "went to jail" << std::endl;
+    std::cout << "Player sent to jail." << std::endl;
 }

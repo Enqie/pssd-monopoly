@@ -32,3 +32,94 @@ What we achieved in this stage:
 4. the turn system is functional, allowing players to smoothly take turns and alternate. 
 
 
+Railroad Rent Test 1: Owning multiple railroads affect rent properly
+- Input:
+P1 moves to and buys all railroads
+P2 lands on first railroad (position 5)
+
+- Expected output:
+P2 balance -200
+
+- Actual output:
+P2 balance didn't change
+FAIL
+
+Railroad Rent Test 2: Fixed getRailroads to reference owner.
+- Input:
+Same as Test 1
+
+- Expected output:
+Same as Test 1
+
+- Actual output:
+P2 balance -200
+SUCCESS
+
+
+House buy Test 1: Buy & rent affecting of houses
+- Input:
+P1 buys Oriental Avenue
+P1 buys 3 houses on property
+P2 lands on Oriental Avenue
+
+- Expected output:
+P1 owns 3 houses on Oriental Avenue
+P2 balance -270
+
+- Actual output:
+P1 owns 3 houses on Oriental Avenue
+P2 balance -270
+SUCCESS
+
+
+Utility rent Test 1: Test rent UI for utilities.
+- Input:
+P1 buys electric company
+P2 lands on electric company
+
+- Expected output:
+Controls UI changes to roll and pay
+
+- Actual output:
+Controls stays the same
+FAIL
+
+Utility rent Test 2: Modified and fixed land & payRent logic.
+- Input:
+Same as Test 1
+
+- Expected output:
+Same as Test 1
+
+- Actual output 
+Controls stays the same
+FAIL
+
+Utility rent Test 3: Added utilityStatus functionality similar to jail
+- Input:
+Same as Test 1
+
+- Expected output:
+Same as Test 1
+
+- Actual output 
+Controls UI changes to roll and pay
+SUCCESS
+
+Utility rent Test 4: UI operation & pay rent test.
+- Input
+P1 buys electric company
+P2 lands on electric company
+P2 rolls dice
+P2 pays rent
+
+- Expected output:
+Controls UI changes to roll and pay
+Roll produces random number, button deactivates. Pay button activates.
+Rent is paid. P2 -roll*4 balance, P1 +roll*4 balance.
+
+- Actual output
+Controls UI changes to roll and pay
+Roll produces random number, button deactivates. Pay button activates.
+Rent is paid. P2 -roll*4 balance, P1 +roll*4 balance.
+SUCCESS

@@ -19,6 +19,7 @@ private:
 
     // booleans for player state
     bool isInJail = false;
+    bool isOnUtility = false;
     bool isBankrupt = false;
     bool moveable = false;
 
@@ -35,17 +36,25 @@ public:
     // getters/setters
     std::string getName(){ return name; }
     int getMoney(){ return money; }
+    Game* getGame() {return game; }
+
     std::unordered_set<Property*> getProperties(){ return ownedProperties; }
     std::unordered_set<Utility*> getUtilities(){ return ownedUtilities; }
     std::unordered_set<Railroad*> getRailroads(){ return ownedRailroads; }
+    
+    // for space status
     bool getJailStatus(){ return isInJail; }
-    // bool getBankruptStatus(){ return isBankrupt; }
     void setJailStatus(bool status){ isInJail = status; }
+    bool getUtilityStatus(){ return isOnUtility; }
+    void setUtilityStatus(bool status){ isOnUtility = status; }
+
     void setBankruptStatus(bool status){ isBankrupt = status; }
-    int getPos(){ return position; }
+    // bool getBankruptStatus(){ return isBankrupt; }
+
     // player movement
     bool canMove() { return moveable; }
     void setCanMove(bool in) { moveable = in; }
+    int getPos(){ return position; }
 
     // function declarations
     bool checkBankruptcy();

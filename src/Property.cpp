@@ -51,15 +51,13 @@ bool Property::canBuy() {
 void Property::buy(Player* player) {
     if (!isOwned) {
         player->buyProperty(this);
-        setOwner(player);
         isOwned = true;
     }
 }
 
 // override pure virtual land function
 void Property::land(Player* player){
-    // if rent is paid, nothing else must be done so return
-    if (isOwned && getOwner() != player) {
+    if (isOwned && getOwner() != player) {  // if property owned & current player is not owner
         payRent(player);
     }
 }

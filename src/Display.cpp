@@ -105,7 +105,8 @@ void Display::displayBoard(Game& game) {
 
 // controls window function
 void Display::displayControls(Game& game) {
-    Player& player = game.getPlayer(); // get current player object
+    Player& player = game.getPlayer();                      // get current player object
+    Space* currentSpace = game.getSpace(player.getPos());   // get current space
 
     // controls window code
     ImGui::Begin("Controls", NULL, window_flags);
@@ -116,16 +117,40 @@ void Display::displayControls(Game& game) {
     ImGui::SameLine();
     ImGui::Text("Balance: $%i", player.getMoney());
 
-    if (!player.getJailStatus()) {
+
+    if (player.getUtilityStatus()) {
+        // player is on another player's utility
+        ImGui::Text("Landed on utility. Please roll to determine rent.");
+
+        ImGui::BeginDisabled(game.getDice());           // disable roll button once rolled
+        if (ImGui::Button("Roll")) game.rollDice();
+        ImGui::EndDisabled();
+
+        ImGui::Text("Roll: %i", game.getDice());        // display roll
+        ImGui::NewLine();
+        ImGui::Text("1 Utility: Rent = 4x dice roll.");
+        ImGui::Text("2 Utilities: Rent = 10x dice roll.");
+
+        ImGui::BeginDisabled(!game.getDice());          // allow paying of rent once rolled
+        if (ImGui::Button("Pay Rent")) {
+            Utility* currentUtility = dynamic_cast<Utility*>(currentSpace);
+            currentUtility->payRent(&player);
+        }
+        ImGui::EndDisabled();
+
+    } else if (!player.getJailStatus()) {
         // player is not in jail controls
         static bool rollDouble = false;         // dice controls
+
         ImGui::BeginDisabled(game.getDice());   // only allow one roll
         if (ImGui::Button("Roll Dice")) rollDouble = game.rollDice();
         ImGui::EndDisabled();
-        ImGui::Text("Roll: %i", game.getDice());
+
+        ImGui::Text("Roll: %i", game.getDice());    // render roll and if doubles
         if (rollDouble) {
             ImGui::Text("Doubles!");
         }
+
         ImGui::BeginDisabled(!player.canMove());    // disable button if player can't move
         if (ImGui::Button("Move")) {
             player.move(game.getDice());            // move active player
@@ -155,8 +180,6 @@ void Display::displayControls(Game& game) {
         ImGui::EndDisabled();
     }
     ImGui::NewLine();
-
-    Space* currentSpace = game.getSpace(player.getPos());
     
     if (currentSpace->canBuy()) {
         ImGui::Text("$%i", currentSpace->getCost());

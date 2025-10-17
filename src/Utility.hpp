@@ -16,8 +16,6 @@ private:
     int cost;
 
     // private methods
-    // method makes player pay rent if they do not own this utility; returns true if player pays rent
-    bool payRent(Player* player);
 
     // method checks if player would like to buy utility; returns true if a player CAN buy 
     bool buyProperty(Player* player);
@@ -30,6 +28,7 @@ public:
 
     // getters/setters
     int getCost(){ return cost; }
+    Player* getOwner() override { return owner; }
     void setOwner(Player* newOwner){ owner = newOwner; }
 
     void setNotOwned();     // reset Property ownership 
@@ -37,6 +36,9 @@ public:
     // public buy functions
     bool canBuy() override;
     void buy(Player* player) override;
+
+    // method makes player pay rent if they do not own this utility; returns true if player pays rent
+    void payRent(Player* player);
 
     // override pure virtual land function
     void land(Player* player) override;
