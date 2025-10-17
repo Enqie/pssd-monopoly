@@ -81,6 +81,44 @@ void Player::removeUtility(Utility* utility){
     ownedUtilities.erase(found);
 }
 
+// remove all owned Properties
+void Player::clearOwnedProperty(){
+    // set all properties in set to not owned
+    for(auto itr : ownedProperties)
+        itr->setNotOwned();
+    
+    // clear set of owned properties and map of owned colours
+    ownedProperties.clear();
+    propertyColours.clear();
+}
+
+// remove all owned Railroads
+void Player::clearOwnedRailroad(){
+    // set all Railroads in set to not owned
+    for(auto itr : ownedRailroads)
+        itr->setNotOwned();
+
+    // clear set of owned Railroads 
+    ownedRailroads.clear();
+}
+
+// remove all owned Utilities
+void Player::clearOwnedUtility(){
+    // set all Utilities in set to not owned
+    for(auto itr : ownedUtilities)
+        itr->setNotOwned();
+
+    // clear set of owned Utilities
+    ownedUtilities.clear();
+}
+
+// reset status of all owned spaces
+void Player::resetAllOwnedSpaces(){
+    clearOwnedProperty();   // reset owned properties
+    clearOwnedRailroad();   // reset owned railroads
+    clearOwnedUtility();    // reset owned utilities
+}
+
 // move spaces
 void Player::move(int spaces) {
     int boardSize = game->getBoardSize();
