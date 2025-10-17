@@ -181,16 +181,25 @@ void Display::displayControls(Game& game) {
         if (ImGui::Button("Pay Bail")) bailPaid = player.payBail();
         if (!bailPaid) ImGui::Text("Bail cannot be paid.");
 
-        // roll double to escape
-        static bool rollDouble = false;
-        ImGui::BeginDisabled(game.getDice());
-        if (ImGui::Button("Roll")) rollDouble = game.rollDice();
-        ImGui::Text("Roll: %i", game.getDice());
 
-        if (rollDouble) {
-            player.setJailStatus(false);    // no longer jailed, allowed to move           
-        }
-        ImGui::EndDisabled();
+        Jail* jail = dynamic_cast<Jail*>(currentSpace);
+
+        if (jail->canRoll(&player)) {
+            // roll double to escape
+            static bool rollDouble = false;
+            ImGui::BeginDisabled(game.getDice());
+            if (ImGui::Button("Roll")) {
+                rollDouble = game.rollDice();
+                if (!rollDouble) jail->addTurn(&player);    // add turn if not rolled double
+            }
+            ImGui::Text("Roll: %i", game.getDice());
+
+            ImGui::Text("%i/%i attempts remaining.", jail->getTurns(&player), jail->getMaxTurns());
+            if (rollDouble) {
+                player.setJailStatus(false);                // no longer jailed, allowed to move
+            }
+            ImGui::EndDisabled();
+        } else ImGui::Text("No more attempts. You must pay bail.");
     }
     ImGui::NewLine();
     

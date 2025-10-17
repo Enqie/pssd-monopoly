@@ -1,4 +1,4 @@
-# \*\*Linux compatibility only. Developed and tested on Ubuntu WSL.\*\*
+# Linux compatibility only. Developed and tested on Ubuntu WSL.
 ## Installing, compiling and running
 Clone repository with `--recursive` flag (or `git submodule update --init` after cloning) to ensure imgui is included.
 
@@ -33,11 +33,11 @@ A player is declared bankrupt if they have no more money. After a player is bank
 #### Passing Go
 Whenever a player lands or passes Go (with the exception of when the player goes to jail), they get $200.
 
-#### Buying Site
-If a player lands on an unowned Site, they have the choice to buy it. There are three types of Sites - Properties, Utilities and Railroads. If the player chooses to buy the Site, they pay the stated amount and now own the Site. If the player does not choose to buy the site, their turn ends. The player who owns of any Site collects rent from any other player who lands on that Site. Owners of the Site do not pay rent.
+#### Buying Space
+If a player lands on an unowned Space, they have the choice to buy it. There are three types of Spaces - Properties, Utilities and Railroads. If the player chooses to buy the Space, they pay the stated amount and now own the Site. If the player does not choose to buy the space, their turn ends. The player who owns the Space collects rent from any other player who lands on that space. Owners of the space do not pay rent.
 
 #### Buying houses on owned Properties
-On your turn, you may choose to buy up to three houses and a hotel on any property you own by selecting the relevant space and selecting the "Buy House" option. Each house or hotel is represented by an additional "H" on the space. Buying a house or hotel increases the rent for any other player who lands on the property. 
+On your turn, you may choose to buy up to three houses and a hotel on any property you own by selecting the relevant space and selecting the "Buy House" option. Each house or hotel is represented by an additional "H" in the spaces' information window. Buying a house or hotel increases the rent for any other player who lands on the property. 
 
 #### Landing on owned Properties
 If you land on a property you do not own, you must pay rent to the owner of the property. The rent paid depends on the number of houses the owner has on the property.
@@ -52,7 +52,7 @@ The rent paid when landing on a Railroad depends on the amount of Railroads owne
 Landing on any of these spaces requires the player to pay the relevant amount of money.
 
 #### Free Parking
-If a player lands on this space, they simply rest here until their next turn. There is no penalty for landing on  this space.
+If a player lands on this space, they simply rest here until their next turn. There is no penalty for landing on this space.
 
 #### Jail and Go To Jail
 A player will be sent to Jail if they land on the "Go To Jail" space. If a player is sent to jail, they do not collect $200 when passing Go.
