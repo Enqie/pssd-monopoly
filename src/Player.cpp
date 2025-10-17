@@ -52,9 +52,8 @@ void Player::clearOwnedProperty(){
     for(auto itr : ownedProperties)
         itr->setNotOwned();
     
-    // clear set of owned properties and map of owned colours
+    // clear set of owned properties 
     ownedProperties.clear();
-    propertyColours.clear();
 }
 
 // remove all owned Railroads

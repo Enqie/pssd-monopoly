@@ -27,9 +27,6 @@ private:
     std::unordered_set<Property*> ownedProperties;
     std::unordered_set<Utility*> ownedUtilities;
     std::unordered_set<Railroad*> ownedRailroads;
-
-    // unordered map to store number of each property colours a player owns
-    std::unordered_map<std::string, int> propertyColours;
 public:
     Player(std::string name, Game* game): game(game), name(name) {}
 
