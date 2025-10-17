@@ -21,17 +21,29 @@ void Display::displayBoard(Game& game) {
 
     if (newGame) ImGui::OpenPopup("New Game"); // create popup if new game.
 
-    // popup modal code
+    // game start popup modal
     if (ImGui::BeginPopupModal("New Game", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
-        ImGui::SliderInt("players.", &playerCount, 2, 4); // input field sets player count
+        ImGui::SliderInt("players.", &playerCount, 2, 4);   // input field sets player count
         // new game button logic. starts game and closes popup.
         if (ImGui::Button("Start Game")) {
             if (newGame) newGame = false;
-            if (playerCount >= 2 && playerCount <= 4) { // check player count before calling start
+            if (playerCount >= 2 && playerCount <= 4) {     // check player count before calling start
                 game.start(playerCount);
                 ImGui::CloseCurrentPopup();
             }
         }
+        ImGui::EndPopup();
+    }
+
+    // winner popup modal
+    Player& player = game.getPlayer();
+    if (game.getPlayerCount() == 1) ImGui::OpenPopup("Winner!");
+        if (ImGui::BeginPopupModal("Winner!", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
+            // displays winner information
+            ImGui::Text("%s wins with $%i!", player.getName().c_str(), player.getMoney());
+            if (ImGui::Button("Close Game")) {  // exit program when close button pressed
+                exit(1);
+            }
         ImGui::EndPopup();
     }
 
@@ -116,7 +128,8 @@ void Display::displayControls(Game& game) {
     ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "%s's Turn!", player.getName().c_str());
     ImGui::SameLine();
     ImGui::Text("Balance: $%i", player.getMoney());
-
+    ImGui::Text("Space %i, %s", player.getPos(), currentSpace->getName().c_str());
+    ImGui::NewLine();
 
     if (player.getUtilityStatus()) {
         // player is on another player's utility
@@ -214,6 +227,7 @@ void Display::displaySpaceInfo(Game& game) {
         ImGui::NewLine();
 
         ImGui::Text("Can be bought? %s", currentSpace->canBuy() ? "Yes" : "No");
+        if (currentSpace->getCost() != -1) ImGui::Text("Cost: $%i", currentSpace->getCost());
 
         Player* owner = currentSpace->getOwner();
         string ownerName = (owner != nullptr) ? owner->getName().c_str() : "None";

@@ -54,3 +54,9 @@ void Game::start(int p) {
     addSpace(new Tax("Luxury Tax", 75));
     addSpace(new Property("Boardwalk", "blue", 400, 200, {50,200,600,1400,2000}));
 }
+
+void Game::deletePlayer(int idx) {
+    players.erase(players.begin() + idx);   // delete player based on index
+    playerCount--;                          // -1 player
+    nextTurn();
+}

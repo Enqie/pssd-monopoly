@@ -5,7 +5,9 @@ using namespace std;
 
 // calculate bankruptcy status of player based on money 
 bool Player::checkBankruptcy(){
-    if(money<=0) isBankrupt = true;
+    if(money<=0) {
+        isBankrupt = true;
+    }
     return isBankrupt;
 }
 
@@ -18,9 +20,9 @@ void Player::buyProperty(Property* property){
     ownedProperties.insert(property);
 
     // update list of owned property colours
-    auto found = propertyColours.find(property->getColour());
-    if(found != propertyColours.end()) found->second++;
-    else propertyColours.insert({property->getColour(), 1});
+    // auto found = propertyColours.find(property->getColour());
+    // if(found != propertyColours.end()) found->second++;
+    // else propertyColours.insert({property->getColour(), 1});
 
     // decrease money of player by cost of buying
     subMoney(property->getCost());
@@ -145,4 +147,13 @@ bool Player::payBail() {
         this->setJailStatus(false);
         return true;
     } else return false;
+}
+
+void Player::subMoney(int amount) {
+    money-=amount; 
+    if (checkBankruptcy()) {
+        std::cout << game->getPlayer().getName() << " has gone bankrupt!" << std::endl;
+        resetAllOwnedSpaces();
+        game->deletePlayer(game->getPlayerIdx());
+    }
 }

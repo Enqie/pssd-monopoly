@@ -31,7 +31,7 @@ private:
     // unordered map to store number of each property colours a player owns
     std::unordered_map<std::string, int> propertyColours;
 public:
-    Player(std::string name, Game* game): game(game), name(name){}
+    Player(std::string name, Game* game): game(game), name(name) {}
 
     // getters/setters
     std::string getName(){ return name; }
@@ -78,8 +78,5 @@ public:
 
     // methods to add or subtract amounts of money from player
     void addMoney(int amount){ money+=amount; }
-    void subMoney(int amount){ 
-        money-=amount; 
-        checkBankruptcy();
-    }
+    void subMoney(int amount);
 };

@@ -37,8 +37,11 @@ class Game {
 
     // player getters
     Player& getPlayer() { return players[activePlayer]; }
+    int getPlayerIdx() { return activePlayer; }
     vector<Player>& getPlayerVec() { return players; }
     int getPlayerCount() { return playerCount; }
+
+    void deletePlayer(int idx);
 
     void nextTurn() {
         activePlayer = (activePlayer + 1) % playerCount;    // set next player

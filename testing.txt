@@ -91,7 +91,7 @@ Same as Test 1
 - Expected output:
 Same as Test 1
 
-- Actual output 
+- Actual output:
 Controls stays the same
 FAIL
 
@@ -102,12 +102,12 @@ Same as Test 1
 - Expected output:
 Same as Test 1
 
-- Actual output 
+- Actual output:
 Controls UI changes to roll and pay
 SUCCESS
 
 Utility rent Test 4: UI operation & pay rent test.
-- Input
+- Input:
 P1 buys electric company
 P2 lands on electric company
 P2 rolls dice
@@ -118,10 +118,82 @@ Controls UI changes to roll and pay
 Roll produces random number, button deactivates. Pay button activates.
 Rent is paid. P2 -roll*4 balance, P1 +roll*4 balance.
 
-- Actual output
+- Actual output:
 Controls UI changes to roll and pay
 Roll produces random number, button deactivates. Pay button activates.
 Rent is paid. P2 -roll*4 balance, P1 +roll*4 balance.
+SUCCESS
+
+
+Bankruptcy Test 1: Check if player is deleted properly.
+- Input:
+P1 buys Baltic Avenue
+P1 lands on tax square until balance <= 0
+
+- Expected output:
+Baltic avenue is no longer owned, can be bought
+P1 is removed from the board
+P1 is no longer activePlayer. P1 can no longer be selected.
+FAIL
+
+- Actual output
+Baltic avenue is no longer owned, cannot be bought
+P1 is removed from the board
+activePlayer is null. P1 can no longer be selected.
+
+Bankruptcy Test 2: Changed deletion logic
+- Input:
+P1 lands on tax square until balance <= 0
+
+- Expected output:
+P1 is removed from the board
+activePlayer is now P2. P1 can no longer be selected.
+
+- Actual output
+P1 is removed from the board
+activePlayer is now P3. P1 can no longer be selected.
+FAIL
+
+Bankruptcy Test 3: Removed local indexes. Replaced with currentPlayerIdx()
+- Input:
+P1 lands on tax square until balance <= 0
+
+- Expected output:
+P1 is removed from the board
+activePlayer is now P2. P1 can no longer be selected.
+
+- Actual output
+P1 is removed from the board
+activePlayer is now P2. P1 can no longer be selected.
+SUCCESS
+
+
+Winner Test 1: One other players bankrupt.
+- Input:
+P1 goes bankrupt.
+Close winner popup.
+
+- Expected output:
+P2 is announced winner
+Program exits once closed
+
+- Actual output:
+P2 is announced winner
+Program exits once closed
+SUCCESS
+
+Winner Test 2: 4 other players bankrupt.
+- Input:
+P1, P2, P3 goes bankrupt.
+Close winner popup.
+
+- Expected output:
+P4 is announced winner
+Program exits once closed
+
+- Actual output:
+P4 is announced winner
+Program exits once closed
 SUCCESS
 
 
