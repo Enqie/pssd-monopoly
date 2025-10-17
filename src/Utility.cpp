@@ -53,7 +53,7 @@ bool Utility::buyProperty(Player* player){
 void Utility::setNotOwned(){
     if(!isOwned) return;
     isOwned = false;
-    owner->removeUtility(this);
+    // owner->removeUtility(this);
 }
 
 // checks if player can buy Utility

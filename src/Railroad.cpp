@@ -50,7 +50,7 @@ bool Railroad::buyProperty(Player* player){
 void Railroad::setNotOwned(){
     if(!isOwned) return;
     isOwned = false;
-    owner->removeRailroad(this);
+    // owner->removeRailroad(this);
 }
 
 // checks if player can buy Railroad

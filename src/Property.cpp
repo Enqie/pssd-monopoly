@@ -16,7 +16,7 @@ void Property::setNotOwned(){
     isOwned = false;                // set isOwned to false
     rent = rentPrice[0];            // reset rent price to initial
     numHouses = 0;                  // reset number of houses
-    owner->removeProperty(this);    // remove this property from player's list of owned property
+    // owner->removeProperty(this);    // remove this property from player's list of owned property
 }
 
 // returns true if owner of property can buy another house/hotel
