@@ -4,6 +4,8 @@
 
 class GoToJail : public Space
 {
+private:
+    int jail = 10; // set jail index
 public:
     GoToJail(): Space("Go To Jail"){}
 
